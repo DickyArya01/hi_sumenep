@@ -1,7 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:hi_sumenep_app/pages/index2.dart';
+import 'package:hi_sumenep_app/pages/index3.dart';
+import 'package:hi_sumenep_app/constant.dart';
 import 'package:http/http.dart' as http;
+
+import 'index1.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({Key? key}) : super(key: key);
@@ -22,7 +27,7 @@ class _IndexPageState extends State<IndexPage> {
 
   fetchUser() async {
     print("fetching...");
-    var _url = "https://randomuser.me/api/?results=10";
+    var _url = url_user;
     var response = await http.get(Uri.parse(_url));
 
     if (response.statusCode == 200) {
@@ -39,22 +44,19 @@ class _IndexPageState extends State<IndexPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("List User"),
-      ),
-      body: getBody(),
-    );
-  }
-
-  Widget getBody() {
-    List items = [1, 2];
     return ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
           return getCard(users[index]);
-        });
-  }
+        });  }
+
+  // Widget getBody() {
+    // return ListView.builder(
+        // itemCount: users.length,
+        // itemBuilder: (context, index) {
+          // return getCard(users[index]);
+        // });
+  // }
 
   Widget getCard(item) {
     var name = item['name']['title'] +
@@ -72,14 +74,13 @@ class _IndexPageState extends State<IndexPage> {
         title: Row(
           children: [
             Container(
-              margin: EdgeInsets.only(right: 20),
+              margin: const EdgeInsets.only(right: 20),
               width: 80,
               height: 80,
               decoration: BoxDecoration(
                   // color: Colors.grey,
                   image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(picture)),
+                      fit: BoxFit.cover, image: NetworkImage(picture)),
                   borderRadius: BorderRadius.circular(120)),
             ),
             Column(
@@ -87,7 +88,7 @@ class _IndexPageState extends State<IndexPage> {
               children: [
                 Text(
                   name,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
                 Text(location)
               ],
