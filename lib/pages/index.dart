@@ -6,7 +6,6 @@ import 'package:hi_sumenep_app/pages/index3.dart';
 import 'package:hi_sumenep_app/constant.dart';
 import 'package:http/http.dart' as http;
 
-import 'index1.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({Key? key}) : super(key: key);
@@ -32,8 +31,10 @@ class _IndexPageState extends State<IndexPage> {
 
     if (response.statusCode == 200) {
       var items = json.decode(response.body)['results'];
+
       setState(() {
         users = items;
+        print(users);
       });
     } else {
       setState(() {
@@ -48,14 +49,15 @@ class _IndexPageState extends State<IndexPage> {
         itemCount: users.length,
         itemBuilder: (context, index) {
           return getCard(users[index]);
-        });  }
+        });
+  }
 
   // Widget getBody() {
-    // return ListView.builder(
-        // itemCount: users.length,
-        // itemBuilder: (context, index) {
-          // return getCard(users[index]);
-        // });
+  // return ListView.builder(
+  // itemCount: users.length,
+  // itemBuilder: (context, index) {
+  // return getCard(users[index]);
+  // });
   // }
 
   Widget getCard(item) {
