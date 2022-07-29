@@ -1,44 +1,36 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:space/pages/category_page.dart';
+import 'package:space/pages/detail_page.dart';
+import 'package:space/pages/home_page.dart';
+import 'package:space/pages/onboarding_page.dart';
+import 'package:space/pages/profile_page.dart';
+import 'package:space/pages/search_page.dart';
+import 'package:space/pages/search_result_page.dart';
+import 'package:space/pages/sign_in_page.dart';
+import 'package:space/pages/splash_page.dart';
+import 'package:space/pages/wishlist_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (context) => SplashPage(),
+        '/onboarding': (context) => OnboardingPage(),
+        '/sign-in': (context) => SignInPage(),
+        '/home': (context) => HomePage(),
+        '/search': (context) => SearchPage(),
+        '/search-result': (context) => SearchResultPage(),
+        '/category': (context) => CategoryPage(),
+        '/wishlist': (context) => WishlistPage(),
+        '/profile': (context) => ProfilePage(),
+        '/detail': (context) => DetailPage(),
+      },
     );
   }
 }
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  final String apiUri = 'https://jsonplaceholder.typicode.com/albums/1';
-
-  Future<http.Response> fetchAlbum() {
-    return http.get(Uri.parse(apiUri));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
-    );
-  }
-}
-
