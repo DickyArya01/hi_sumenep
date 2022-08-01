@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/pages/index.dart';
 import 'package:hi_sumenep_app/pages/index1.dart';
 import 'package:hi_sumenep_app/pages/index2.dart';
@@ -17,10 +15,10 @@ class _HomePageState extends State<HomePage> {
    int _selectedIndex = 0;
 
   final List<Widget> _children = [
-    IndexPage(),
-    IndexPage1(),
+    const IndexPage(),
+    const IndexPage1(),
     MapSample(),
-    IndexPage3()
+    const IndexPage3()
   ];
 
   void onItemTapped(int index) {

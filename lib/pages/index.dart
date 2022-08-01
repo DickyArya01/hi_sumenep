@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:hi_sumenep_app/pages/index2.dart';
-import 'package:hi_sumenep_app/pages/index3.dart';
 import 'package:hi_sumenep_app/constant.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,7 +32,7 @@ class _IndexPageState extends State<IndexPage> {
 
       setState(() {
         users = items;
-        print(users);
+        // print(users);
       });
     } else {
       setState(() {
