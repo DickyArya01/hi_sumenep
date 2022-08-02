@@ -8,3 +8,5 @@ const double sizeOfIcon = 30;
 const String logo = 'assets/logo.png';
 
 const String hintText = 'Mau kemana hari ini ?';
+
+const String google_api_key = "AIzaSyBoTwTtRhDRCLzK-BXserBNwHpJGMiLEi4";
