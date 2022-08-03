@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/component/navbar.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
-import 'package:hi_sumenep_app/page/navbarPage/homepage.dart';
+import 'package:hi_sumenep_app/page/mainPage/homepage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -47,6 +49,50 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           statusBarBrightness: Brightness.light, // For iOS (dark icons)
         ), //rubah warna status bar
         elevation: 0, // menghilangkan shadow
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(56),
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: x16),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(x24),
+                        borderSide: BorderSide.none
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      hintText: hintText,
+                    ),
+                    
+                  )),
+                GestureDetector(
+                  onTap: () {
+                    
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(left: x24),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(x8),
+                    ),
+                    child: Transform.rotate(
+                      angle: pi / 2,
+                      child: const Icon(
+                        Icons.candlestick_chart_rounded,
+                        color: Colors.white,
+                        size: 38,
+                      ),
+                      )
+                  ),
+                )
+            ],
+
+            ),
+          )
+        ),
       ),
       body: _children[selectedIndex],
       bottomNavigationBar: FABBottomAppBar(
