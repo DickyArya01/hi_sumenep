@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -14,24 +15,104 @@ class Dummy {
 
 List<Dummy> dataDummmy = [
   Dummy(
-      title: 'Pantai Slopeng',
+      title: 'Data Wisata ',
       url:
-          'https://beritalima.com/wp-content/uploads/2020/03/@andrewardara-630x380-1.jpg',
+          logo,
       desc: 'ini pantai slopeng'),
   Dummy(
-      title: 'Pantai Slopeng',
+      title: 'Data Wisata ',
       url:
-          'https://beritalima.com/wp-content/uploads/2020/03/@andrewardara-630x380-1.jpg',
+          logo,
       desc: 'ini pantai slopeng'),
   Dummy(
-      title: 'Pantai Slopeng',
+      title: 'Data Wisata ',
       url:
-          'https://beritalima.com/wp-content/uploads/2020/03/@andrewardara-630x380-1.jpg',
+          logo,
       desc: 'ini pantai slopeng'),
   Dummy(
-      title: 'Pantai Slopeng',
+      title: 'Data Wisata ',
       url:
-          'https://beritalima.com/wp-content/uploads/2020/03/@andrewardara-630x380-1.jpg',
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
+      desc: 'ini pantai slopeng'),
+  Dummy(
+      title: 'Data Wisata ',
+      url:
+          logo,
       desc: 'ini pantai slopeng'),
 ];
 
@@ -46,24 +127,23 @@ class PanelWidget extends StatelessWidget {
           buildDragHandle(),
           Container(
             padding: const EdgeInsets.symmetric(vertical: x16),
-            child: const Center(
+            child:  Center(
               child: Text(
-                panelSlideHint,
-                style: TextStyle(fontSize: x24),
+                '${dataDummmy.length} $panelSlideHint',
+                style: const TextStyle(fontSize: x16),
               ),
             ),
           ),
           Expanded(
             child: ListView.builder(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: x16),
+                padding: const EdgeInsets.symmetric(horizontal: x16),
                 controller: controller,
                 itemCount: dataDummmy.length,
                 itemBuilder: (context, int index) => Column(
                       children: [
-                        Image(image: NetworkImage(dataDummmy[index].url)),
+                        Image(image: AssetImage(dataDummmy[index].url)),
                         Text(
-                          dataDummmy[index].title,
+                          '${dataDummmy[index].title} $index',
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: x16),
                         )
@@ -74,13 +154,11 @@ class PanelWidget extends StatelessWidget {
       );
 
   Widget buildDragHandle() => Center(
-    child: Container(
-      margin: const EdgeInsets.only(top: x8),
-      width: 30,
-      height: 5,
-      decoration: BoxDecoration(
-        color: Colors.grey[400]
-      ),
-    ),
-  );
+        child: Container(
+          margin: const EdgeInsets.only(top: x8),
+          width: 30,
+          height: 5,
+          decoration: BoxDecoration(color: Colors.grey[400]),
+        ),
+      );
 }
