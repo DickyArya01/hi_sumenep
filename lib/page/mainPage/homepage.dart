@@ -18,11 +18,14 @@ class _homePageState extends State<homePage> {
   Widget build(BuildContext context) {
     return SlidingUpPanel(
       minHeight: visualHeight(context) * 0.1,
-      maxHeight: visualHeight(context) * 0.8,
-      body: Center(
+      maxHeight: visualHeight(context) * 0.64,
+      parallaxEnabled: true,
+      parallaxOffset: 0.5,
+      body: const Center(
         child: Text('Home page'),
       ),
       panelBuilder: (controller) => PanelWidget(controller: controller),
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(x24)),
     );
   }
 }
