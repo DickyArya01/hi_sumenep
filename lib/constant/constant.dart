@@ -20,6 +20,10 @@ const String google_api_key = "AIzaSyBoTwTtRhDRCLzK-BXserBNwHpJGMiLEi4";
 
 const String logo = 'assets/logo.png';
 
+const String url = 'https://source.unsplash.com/user/c_v_r/1900x800';
+
 // Text
 const String hintText = 'Mau kemana hari ini ?';
 const String panelSlideHint = 'wisata';
+
+

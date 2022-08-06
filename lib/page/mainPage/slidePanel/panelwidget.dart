@@ -1,125 +1,28 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 
-class Dummy {
-  String title;
-  String url;
-  String desc;
+class PanelWidget extends StatefulWidget {
+  ScrollController controller;
+  int indexCategory;
+  PanelWidget({Key? key, required this.controller, required this.indexCategory})
+      : super(key: key);
 
-  Dummy({required this.title, required this.url, required this.desc});
+  @override
+  State<PanelWidget> createState() => _PanelWidgetState();
 }
 
-List<Dummy> dataDummmy = [
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-  Dummy(
-      title: 'Data Wisata ',
-      url:
-          logo,
-      desc: 'ini pantai slopeng'),
-];
+class _PanelWidgetState extends State<PanelWidget> {
+  List<Wisata> data = [];
 
-class PanelWidget extends StatelessWidget {
-  ScrollController controller;
-
-  PanelWidget({Key? key, required this.controller}) : super(key: key);
+  @override
+  void initState() {
+    super.initState();
+    data = implementData(widget.indexCategory);
+  }
 
   @override
   Widget build(BuildContext context) => Column(
@@ -127,9 +30,9 @@ class PanelWidget extends StatelessWidget {
           buildDragHandle(),
           Container(
             padding: const EdgeInsets.symmetric(vertical: x16),
-            child:  Center(
+            child: Center(
               child: Text(
-                '${dataDummmy.length} $panelSlideHint',
+                '${data.length} $panelSlideHint',
                 style: const TextStyle(fontSize: x16),
               ),
             ),
@@ -137,16 +40,18 @@ class PanelWidget extends StatelessWidget {
           Expanded(
             child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: x16),
-                controller: controller,
-                itemCount: dataDummmy.length,
+                controller: widget.controller,
+                itemCount: data.length,
                 itemBuilder: (context, int index) => Column(
                       children: [
-                        Image(image: AssetImage(dataDummmy[index].url)),
+                        Image(image: NetworkImage(data[index].url)),
                         Text(
-                          '${dataDummmy[index].title} $index',
+                          '${data[index].title} $index',
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: x16),
-                        )
+                        ),
+                        Text(data[index].desc),
+                        Text('${data[index].category}')
                       ],
                     )),
           )

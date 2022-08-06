@@ -1,69 +1,97 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/page/mainPage/slidePanel/panelwidget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-List<String> category = [
-  'Semua',
-  'Rekomendasi',
-  'Alam',
-  'Budaya',
-  'Kuliner',
-  'Budaya',
-];
-
-class homePage extends StatefulWidget {
-  const homePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key? key}) : super(key: key);
 
   @override
-  State<homePage> createState() => _homePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _homePageState extends State<homePage> {
+class _HomePageState extends State<HomePage> {
+  int currentCategory = 0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  ElevatedButton buttonCategory(int index) {
+    if (currentCategory != index) {
+      return ElevatedButton(
+        onPressed: () {
+          currentCategory = index;
+          implementData(index);
+          setState(() {
+            buttonCategory(index);
+            slidingUpPanel(index);
+          });
+        },
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(x8),
+                    side: const BorderSide(color: Colors.blue)))),
+        child: Text(
+          category[index],
+          style: const TextStyle(color: Colors.blue),
+        ),
+      );
+    } else {
+      return ElevatedButton(
+        onPressed: () {},
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(x8),
+                    side: const BorderSide(color: Colors.blue)))),
+        child: Text(
+          category[index],
+          style: const TextStyle(color: Colors.white),
+        ),
+      );
+    }
+  }
+
+  SlidingUpPanel slidingUpPanel(index) {
+    return SlidingUpPanel(
+      minHeight: visualHeight(context) * 0.08,
+      maxHeight: visualHeight(context),
+      parallaxEnabled: true,
+      parallaxOffset: 0.5,
+      body: const Center(
+        child: Text('Home page'),
+      ),
+      panelBuilder: (controller) => PanelWidget(
+        controller: controller,
+        indexCategory: index,
+      ),
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(x24)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SlidingUpPanel(
-          minHeight: visualHeight(context) * 0.08,
-          maxHeight: visualHeight(context),
-          parallaxEnabled: true,
-          parallaxOffset: 0.5,
-          body: const Center(
-            child: Text('Home page'),
-          ),
-          panelBuilder: (controller) => PanelWidget(controller: controller),
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(x24)),
-        ),
-        Container(
+    return Stack(children: [
+      slidingUpPanel(currentCategory),
+      Container(
           color: Colors.white,
           child: SizedBox(
-            height: 52 ,
-            width: visualHeight(context),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: category.length,
-              itemBuilder: (context, index) => ButtonTheme(
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(x16, x8, 0, 0),
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.blue),
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(x8)
-                      )
-                    ),
-                    child: Text(category[index])),
-
-                )
-
-              )
-              )
-                )
-        )
+              height: 52,
+              width: visualHeight(context),
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: category.length,
+                  itemBuilder: (context, index) => ButtonTheme(
+                      child: Container(
+                          padding: (index == category.length-1)? const EdgeInsets.fromLTRB( x16, x16, x16, 0) : const EdgeInsets.fromLTRB(x16, x16, 0, 0),
+                          child: buttonCategory(index))))))
     ]);
   }
 }

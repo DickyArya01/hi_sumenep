@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/page/home.dart';
 
 void main() {
   runApp(const HiSumenep());
+  addData();
 }
 
 class HiSumenep extends StatefulWidget {
@@ -16,9 +18,9 @@ class _HiSumenepState extends State<HiSumenep> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-     debugShowCheckedModeBanner: false,
-     title: 'Hi Sumenep',
-     home: HomePage(),
+      debugShowCheckedModeBanner: false,
+      title: 'Hi Sumenep',
+      home: Home(),
     );
   }
 }

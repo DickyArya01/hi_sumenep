@@ -4,21 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hi_sumenep_app/component/appbar/favouriteAppbar.dart';
+import 'package:hi_sumenep_app/component/appbar/homeAppbar.dart';
+import 'package:hi_sumenep_app/component/appbar/profileAppbar.dart';
 import 'package:hi_sumenep_app/component/navbar.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
+import 'package:hi_sumenep_app/page/mainPage/favouritepage.dart';
 import 'package:hi_sumenep_app/page/mainPage/homepage.dart';
+import 'package:hi_sumenep_app/page/mainPage/profilepage.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+class _HomeState extends State<Home> with TickerProviderStateMixin {
   int selectedIndex = 0;
 
   void _selectedTab(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
+  selectedCategory(int index) {
     setState(() {
       selectedIndex = index;
     });
@@ -37,9 +48,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   ];
 
   final List<Widget> _children = [
-    const homePage(),
-    pageFavourite(),
-    pageProfile()
+    HomePage(),
+    FavouritePage(),
+    ProfilePage()
   ];
 
   @override
@@ -58,79 +69,4 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       // bottomNavigationBar: const Navbar()
     );
   }
-}
-
-AppBar homeAppbar() {
-  return AppBar(
-    title: Image.asset(logo),
-    backgroundColor: Colors.white,
-    shadowColor: Colors.white,
-    systemOverlayStyle: const SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-      statusBarBrightness: Brightness.light, // For iOS (dark icons)
-    ), //rubah warna status bar
-    elevation: 0, // menghilangkan shadow
-    bottom: PreferredSize(
-        preferredSize: Size.fromHeight(56),
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: x16),
-          child: Row(
-            children: [
-              Expanded(
-                  child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(x24),
-                      borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  hintText: hintText,
-                ),
-              )),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                    margin: const EdgeInsets.only(left: x24),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(x8),
-                    ),
-                    child: Transform.rotate(
-                      angle: pi / 2,
-                      child: const Icon(
-                        Icons.candlestick_chart_rounded,
-                        color: Colors.white,
-                        size: 38,
-                      ),
-                    )),
-              )
-            ],
-          ),
-        )),
-  );
-}
-
-AppBar favouriteAppbar() {
-  return AppBar(
-    title: const Text('Favourite'),
-  );
-}
-
-AppBar profileAppbar() {
-  return AppBar(
-    title: const Text('Profile'),
-  );
-}
-
-Center pageFavourite() {
-  return const Center(
-    child: Text('Favourite'),
-  );
-}
-
-Center pageProfile() {
-  return const Center(
-    child: Text('Profile'),
-  );
 }
