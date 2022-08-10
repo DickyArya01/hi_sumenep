@@ -3,12 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
+import 'package:hi_sumenep_app/component/card.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 
 class PanelWidget extends StatefulWidget {
   ScrollController controller;
   int indexCategory;
-  PanelWidget({Key? key, required this.controller, required this.indexCategory})
+  final Function(String)? onTap;
+
+  PanelWidget(
+      {Key? key,
+      required this.controller,
+      required this.indexCategory,
+      this.onTap})
       : super(key: key);
 
   @override
@@ -42,28 +49,25 @@ class _PanelWidgetState extends State<PanelWidget> {
                 padding: const EdgeInsets.symmetric(horizontal: x16),
                 controller: widget.controller,
                 itemCount: data.length,
-                itemBuilder: (context, int index) => Column(
-                      children: [
-                        Image(image: NetworkImage(data[index].url)),
-                        Text(
-                          '${data[index].title} $index',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: x16),
-                        ),
-                        Text(data[index].desc),
-                        Text('${data[index].category}')
-                      ],
-                    )),
+                itemBuilder: (context, int index) => CustomCard(wisata: dataDummmy[index],)),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: x16),
           )
         ],
       );
 
-  Widget buildDragHandle() => Center(
-        child: Container(
-          margin: const EdgeInsets.only(top: x8),
-          width: 30,
-          height: 5,
-          decoration: BoxDecoration(color: Colors.grey[400]),
+  Widget buildDragHandle() => GestureDetector(
+        onTap: () {
+          widget.onTap!("njay");
+        },
+        child: Center(
+          child: Container(
+            margin: const EdgeInsets.only(top: x8),
+            width: 30,
+            height: 5,
+            decoration: BoxDecoration(color: Colors.grey[400]),
+          ),
         ),
       );
 }

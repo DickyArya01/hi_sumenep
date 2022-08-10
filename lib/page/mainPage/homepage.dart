@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
+import 'package:hi_sumenep_app/component/map.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/page/mainPage/slidePanel/panelwidget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   int currentCategory = 0;
 
   @override
@@ -62,15 +64,16 @@ class _HomePageState extends State<HomePage> {
   SlidingUpPanel slidingUpPanel(index) {
     return SlidingUpPanel(
       minHeight: visualHeight(context) * 0.08,
-      maxHeight: visualHeight(context),
+      maxHeight: visualHeight(context) * 0.8,
       parallaxEnabled: true,
       parallaxOffset: 0.5,
-      body: const Center(
-        child: Text('Home page'),
-      ),
+      body: MapSample(),
       panelBuilder: (controller) => PanelWidget(
         controller: controller,
         indexCategory: index,
+        onTap: (value) {
+
+        },
       ),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(x24)),
     );
@@ -83,14 +86,16 @@ class _HomePageState extends State<HomePage> {
       Container(
           color: Colors.white,
           child: SizedBox(
-              height: 52,
+              height: 68,
               width: visualHeight(context),
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: category.length,
                   itemBuilder: (context, index) => ButtonTheme(
                       child: Container(
-                          padding: (index == category.length-1)? const EdgeInsets.fromLTRB( x16, x16, x16, 0) : const EdgeInsets.fromLTRB(x16, x16, 0, 0),
+                          padding: (index == category.length - 1)
+                              ? const EdgeInsets.fromLTRB(x16, x16, x16, x16)
+                              : const EdgeInsets.fromLTRB(x16, x16, 0, x16),
                           child: buttonCategory(index))))))
     ]);
   }

@@ -5,6 +5,7 @@ import 'package:hi_sumenep_app/page/home.dart';
 void main() {
   runApp(const HiSumenep());
   addData();
+  addComment();
 }
 
 class HiSumenep extends StatefulWidget {

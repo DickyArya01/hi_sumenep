@@ -7,7 +7,6 @@ import 'package:hi_sumenep_app/constant/constant.dart';
 
 AppBar homeAppbar() {
   return AppBar(
-    title: Image.asset(logo),
     backgroundColor: Colors.white,
     shadowColor: Colors.white,
     systemOverlayStyle: const SystemUiOverlayStyle(
@@ -17,39 +16,24 @@ AppBar homeAppbar() {
     ), //rubah warna status bar
     elevation: 0, // menghilangkan shadow
     bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(56),
+        preferredSize: const Size.fromHeight(x8),
         child: Container(
+          height: 52,
           margin: const EdgeInsets.symmetric(horizontal: x16),
           child: Row(
             children: [
               Expanded(
                   child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(x24),
-                      borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  hintText: hintText,
-                ),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(x24),
+                        borderSide: BorderSide.none),
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                    hintText: hintText,
+                    icon: Icon(Icons.abc),
+                  ),
               )),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                    margin: const EdgeInsets.only(left: x24),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(x8),
-                    ),
-                    child: Transform.rotate(
-                      angle: pi / 2,
-                      child: const Icon(
-                        Icons.candlestick_chart_rounded,
-                        color: Colors.white,
-                        size: 38,
-                      ),
-                    )),
-              )
             ],
           ),
         )),

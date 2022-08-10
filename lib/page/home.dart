@@ -13,6 +13,7 @@ import 'package:hi_sumenep_app/page/mainPage/favouritepage.dart';
 import 'package:hi_sumenep_app/page/mainPage/homepage.dart';
 import 'package:hi_sumenep_app/page/mainPage/profilepage.dart';
 
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -22,6 +23,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   int selectedIndex = 0;
+
+  double navbarHeight = 0;
 
   void _selectedTab(int index) {
     setState(() {
@@ -33,6 +36,23 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     setState(() {
       selectedIndex = index;
     });
+  }
+
+
+  itemNavbar(double value) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      height: value,
+      child: FABBottomAppBar(
+        height: value,
+        color: Colors.grey,
+        selectedColor: Colors.blue,
+        backgroundColor: Colors.white,
+        notchedShape: const CircularNotchedRectangle(),
+        onTabSelected: _selectedTab,
+        items: listItems,
+      ),
+    );
   }
 
   final List<FABBottomAppBarItem> listItems = [
@@ -58,14 +78,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return Scaffold(
       appBar: _appbar[selectedIndex],
       body: _children[selectedIndex],
-      bottomNavigationBar: FABBottomAppBar(
-        color: Colors.grey,
-        selectedColor: Colors.blue,
-        backgroundColor: Colors.white,
-        notchedShape: const CircularNotchedRectangle(),
-        onTabSelected: _selectedTab,
-        items: listItems,
-      ),
+      bottomNavigationBar:  itemNavbar(kBottomNavigationBarHeight)
       // bottomNavigationBar: const Navbar()
     );
   }
