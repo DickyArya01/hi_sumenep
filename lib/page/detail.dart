@@ -37,17 +37,18 @@ class _DetailState extends State<Detail> {
           ),
           actions: [
             Container(
-              width: 40,
-              margin: const EdgeInsets.only(right: x8), 
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle
-              ),
-              child: IconButton(
-              onPressed: () {}, 
-              icon: Icon(
-                Icons.favorite,
-                color: Colors.grey,)))],
+                width: 32,
+                margin: const EdgeInsets.only(right: x8),
+                decoration: const BoxDecoration(
+                    color: Colors.white, shape: BoxShape.circle),
+                child: IconButton(
+                    onPressed: () {},
+                    padding: EdgeInsets.symmetric(horizontal: 2),
+                    icon: Icon(
+                      Icons.favorite,
+                      color: Colors.grey,
+                    )))
+          ],
           backgroundColor: Colors.white,
           shadowColor: Colors.white,
           systemOverlayStyle: const SystemUiOverlayStyle(
@@ -98,7 +99,20 @@ class _DetailState extends State<Detail> {
             padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text('Fasilitas'), Text('Grid Fasilitas')],
+              children: [
+                Text('Fasilitas'),
+                SizedBox(
+                    height: visualHeight(context) * 0.4,
+                    child: GridView.builder(
+
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Icon(
+                            Icons.abc
+                          );
+                        }))
+              ],
             ),
           ),
           Container(
