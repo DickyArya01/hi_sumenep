@@ -40,7 +40,10 @@ class _PanelWidgetState extends State<PanelWidget> {
             child: Center(
               child: Text(
                 '${data.length} $panelSlideHint',
-                style: const TextStyle(fontSize: x16),
+                style: blackAccentTextStyle.copyWith(
+                  fontSize: 16,
+                  fontWeight: semiBold
+                ),
               ),
             ),
           ),

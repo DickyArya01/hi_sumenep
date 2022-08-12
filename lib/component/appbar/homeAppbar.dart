@@ -32,9 +32,10 @@ AppBar homeAppbar() {
                     filled: true,
                     fillColor: Colors.grey[200],
                     hintText: hintText,
-                    icon: const Icon(
+                    hintStyle: greyTextStyle,
+                    icon: Icon(
                       IconApp.iconApp,
-                      color: Colors.blue,
+                      color: kBlueColor,
                       size: 48,),
                   ),
               )),

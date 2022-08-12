@@ -38,36 +38,28 @@ Color kGreyColor = Color(0xff94959B);
 Color kLineDarkColor = Color(0xffEAEAEA);
 Color kWhiteGreyColor = Color(0xffF1F1F5);
 Color kWhiteColor = Color(0xffFFFFFF);
-Color kRedColor = Color(0xffFF314A);
-Color kYellowColor = Color(0xffFFBA00);
-Color kBlueColor = Color(0xff2972FF);
+Color kBlueColor = Color(0xff1581B7);
 Color kDarkBackgroundColor = Color(0xff252836);
 
-TextStyle blackTextStyle = GoogleFonts.nunito(
+TextStyle blackTextStyle = GoogleFonts.poppins(
   color: kBlackColor,
 );
-TextStyle blackAccentTextStyle = GoogleFonts.nunito(
+TextStyle blackAccentTextStyle = GoogleFonts.poppins(
   color: kBlackAccentColor,
 );
-TextStyle greyTextStyle = GoogleFonts.nunito(
+TextStyle greyTextStyle = GoogleFonts.poppins(
   color: kGreyColor,
 );
-TextStyle lineDarkTextStyle = GoogleFonts.nunito(
+TextStyle lineDarkTextStyle = GoogleFonts.poppins(
   color: kLineDarkColor,
 );
-TextStyle whiteGreyTextStyle = GoogleFonts.nunito(
+TextStyle whiteGreyTextStyle = GoogleFonts.poppins(
   color: kWhiteGreyColor,
 );
-TextStyle whiteTextStyle = GoogleFonts.nunito(
+TextStyle whiteTextStyle = GoogleFonts.poppins(
   color: kWhiteColor,
 );
-TextStyle redTextStyle = GoogleFonts.nunito(
-  color: kRedColor,
-);
-TextStyle yellowTextStyle = GoogleFonts.nunito(
-  color: kYellowColor,
-);
-TextStyle blueTextStyle = GoogleFonts.nunito(
+TextStyle blueTextStyle = GoogleFonts.poppins(
   color: kBlueColor,
 );
 
@@ -76,5 +68,6 @@ FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;
 FontWeight semiBold = FontWeight.w600;
 FontWeight bold = FontWeight.w700;
+FontWeight black = FontWeight.w900;
 
 

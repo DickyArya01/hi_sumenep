@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/component/map.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
@@ -35,24 +36,24 @@ class _HomePageState extends State<HomePage> {
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(32),
-                    side: const BorderSide(color: Colors.blue)))),
+                    side: BorderSide(color: kBlueColor)))),
         child: Text(
           category[index],
-          style: const TextStyle(color: Colors.blue),
+          style: blueTextStyle,
         ),
       );
     } else {
       return ElevatedButton(
         onPressed: () {},
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+            backgroundColor: MaterialStateProperty.all<Color>(kBlueColor),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(32),
-                    side: const BorderSide(color: Colors.blue)))),
+                    side: BorderSide(color: kBlueColor)))),
         child: Text(
           category[index],
-          style: const TextStyle(color: Colors.white),
+          style: whiteTextStyle,
         ),
       );
     }
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
   SlidingUpPanel slidingUpPanel(index) {
     return SlidingUpPanel(
       minHeight: visualHeight(context) * 0.08,
-      maxHeight: visualHeight(context) * 0.8,
+      maxHeight: visualHeight(context) * 0.76,
       parallaxEnabled: true,
       parallaxOffset: 0.5,
       body: MapSample(),
@@ -80,20 +81,37 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Stack(children: [
       slidingUpPanel(currentCategory),
-      Container(
-          color: Colors.white,
-          child: SizedBox(
-              height: 68,
-              width: visualHeight(context),
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: category.length,
-                  itemBuilder: (context, index) => ButtonTheme(
-                      child: Container(
-                          padding: (index == category.length - 1)
-                              ? const EdgeInsets.fromLTRB(x16, x16, x16, x16)
-                              : const EdgeInsets.fromLTRB(x16, x16, 0, x16),
-                          child: buttonCategory(index))))))
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            color: Colors.white,
+            width: visualWidth(context),
+            padding: EdgeInsets.only(left: x16, top: x16),
+            child: Text(
+              'Kategori',
+              style: blackTextStyle.copyWith(
+                fontSize: 20,
+                fontWeight: semiBold
+              ),
+            ),
+          ),
+          Container(
+              color: Colors.white,
+              child: SizedBox(
+                  height: 68,
+                  width: visualHeight(context),
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: category.length,
+                      itemBuilder: (context, index) => ButtonTheme(
+                          child: Container(
+                              padding: (index == category.length - 1)
+                                  ? const EdgeInsets.fromLTRB(x16, x16, x16, x16)
+                                  : const EdgeInsets.fromLTRB(x16, x16, 0, x16),
+                              child: buttonCategory(index)))))),
+        ],
+      )
     ]);
   }
 }

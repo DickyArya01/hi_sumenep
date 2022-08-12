@@ -41,7 +41,7 @@ void addData() {
     dataDummmy.add(Wisata(
         title: 'Data Wisata $i',
         url: url,
-        desc: 'Ini deskripsi wisata $i',
+        desc: '$i Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla posuere sollicitudin aliquam ultrices sagittis orci a. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Et ultrices neque ornare aenean euismod. Congue mauris rhoncus aenean vel elit scelerisque mauris. Hac habitasse platea dictumst quisque sagittis purus sit. Aliquet eget sit amet tellus cras adipiscing enim eu turpis. Vitae auctor eu augue ut lectus arcu bibendum at. Elit sed vulputate mi sit. Quis hendrerit dolor magna eget. Erat imperdiet sed euismod nisi porta lorem mollis aliquam ut. Sed euismod nisi porta lorem mollis. Vel turpis nunc eget lorem dolor sed. Nam at lectus urna duis convallis convallis tellus id. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo. Quis hendrerit dolor magna eget est lorem ipsum. Ac tortor dignissim convallis aenean et. Non sodales neque sodales ut etiam sit amet nisl. Quis varius quam quisque id.',
         lat: lat,
         lon: lon,
         category: random.nextInt(category.length)));

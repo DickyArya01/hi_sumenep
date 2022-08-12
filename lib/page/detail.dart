@@ -7,6 +7,26 @@ import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/component/map.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 
+Text styleText(String text, double size, FontWeight weight, Color color) {
+  return Text(
+    text,
+    style: (color == kBlackColor)
+        ? blackTextStyle.copyWith(
+            fontSize: size,
+            fontWeight: weight,
+          )
+        : (color == kBlueColor)
+        ?blueTextStyle.copyWith(
+            fontSize: size,
+            fontWeight: weight,
+          )
+        :greyTextStyle.copyWith(
+            fontSize: size,
+            fontWeight: weight,
+          ),
+  );
+}
+
 class Detail extends StatefulWidget {
   final Wisata wisata;
   const Detail({Key? key, required this.wisata}) : super(key: key);
@@ -77,13 +97,15 @@ class _DetailState extends State<Detail> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.wisata.title),
-                    Text('Kecamatan socah')
+                    styleText(widget.wisata.title, 18, bold, kBlackColor),
+                    styleText('Kecamatan Socah', 12, semiBold, kBlueColor)
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [Text('IDR 5000'), Text('per orang')],
+                  children: [
+                    styleText('IDR 5000', 16, semiBold, kBlackColor), 
+                    styleText('per orang', 12, semiBold, kBlueColor)],
                 ),
               ],
             ),
@@ -92,7 +114,11 @@ class _DetailState extends State<Detail> {
             padding: EdgeInsets.symmetric(vertical: x16, horizontal: x16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text('Deskripsi'), Text(widget.wisata.desc)],
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 4),
+                  child: styleText('Deskripsi', 14, semiBold, kBlackColor)), 
+                styleText(widget.wisata.desc, 12, medium, kBlackColor)],
             ),
           ),
           Container(
@@ -100,17 +126,17 @@ class _DetailState extends State<Detail> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Fasilitas'),
+                Container(
+                  margin: EdgeInsets.only(bottom: 4),
+                  child: styleText('Fasilitas', 14, semiBold, kBlackColor)),
                 SizedBox(
                     height: visualHeight(context) * 0.4,
                     child: GridView.builder(
-
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2),
                         itemBuilder: (BuildContext context, int index) {
-                          return Icon(
-                            Icons.abc
-                          );
+                          return Icon(Icons.abc);
                         }))
               ],
             ),
@@ -119,7 +145,10 @@ class _DetailState extends State<Detail> {
             padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 16)),
+                  textStyle: whiteTextStyle.copyWith(
+                    fontSize: 14,
+                    fontWeight: semiBold
+                  )),
               onPressed: () {},
               child: Container(
                   padding: EdgeInsets.symmetric(vertical: x16),
@@ -131,8 +160,10 @@ class _DetailState extends State<Detail> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Lokasi'),
-                Text('kec. apah, kabupaten apah'),
+                Container(
+                  margin: EdgeInsets.only(bottom: 4),
+                  child: styleText('Lokasi', 14, semiBold, kBlackColor)),
+                styleText('Detail lokasi', 12, semiBold, kGreyColor),
                 GestureDetector(
                   onDoubleTap: () {
                     print('klik');
@@ -151,25 +182,27 @@ class _DetailState extends State<Detail> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Travel'),
+                Container(
+                  margin: EdgeInsets.only(bottom: 4),
+                  child: styleText('Travel', 14, semiBold, kBlackColor)),
                 Row(
                   children: [
                     Container(
                       margin: EdgeInsets.only(right: x8),
                       child: Column(
-                        children: [Icon(Icons.abc), Text('Travel 1')],
+                        children: [Icon(Icons.abc), styleText('Travel 1', 12, medium, kBlackColor)],
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(right: x8),
                       child: Column(
-                        children: [Icon(Icons.abc), Text('Travel 2')],
+                        children: [Icon(Icons.abc), styleText('Travel 2', 12, medium, kBlackColor)],
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(right: x8),
                       child: Column(
-                        children: [Icon(Icons.abc), Text('Travel 3')],
+                        children: [Icon(Icons.abc), styleText('Travel 3', 12, medium, kBlackColor)],
                       ),
                     ),
                   ],
@@ -179,7 +212,7 @@ class _DetailState extends State<Detail> {
           ),
           Container(
             padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
-            child: Text('Komentar'),
+            child: styleText('Komentar', 14, semiBold, kBlackColor),
           )
         ])),
         SliverList(
@@ -189,7 +222,10 @@ class _DetailState extends State<Detail> {
             padding: const EdgeInsets.symmetric(vertical: x8, horizontal: x16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text(komen[index].user), Text(komen[index].comment)],
+              children: [
+                styleText(komen[index].user, 12, semiBold, kBlackColor),
+                styleText('day month year', 10, medium, kGreyColor), 
+                styleText(komen[index].comment, 12, semiBold, kBlackColor)],
             ),
           );
         })),

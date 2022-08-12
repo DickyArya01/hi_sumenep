@@ -46,7 +46,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       child: FABBottomAppBar(
         height: value,
         color: Colors.grey,
-        selectedColor: Colors.blue,
+        selectedColor: kBlueColor,
         backgroundColor: Colors.white,
         notchedShape: const CircularNotchedRectangle(),
         onTabSelected: _selectedTab,

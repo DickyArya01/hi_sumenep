@@ -22,17 +22,17 @@ Container cardImage(context, String url){
                     );
 }
 
-Container descText (String title){
+Container blackText (String title, double size, double topPadding, double leftPadding){
   return Container(
-    margin: const EdgeInsets.only(
-      left: 24,
-      top: 4,
+    margin: EdgeInsets.only(
+      left: leftPadding,
+      top: topPadding,
     ),
     child: Text(
       title,
       style: blackTextStyle.copyWith(
-        fontSize: 20,
-        fontWeight: bold,
+        fontSize: size,
+        fontWeight: semiBold,
       ),
     ),
   );
@@ -59,7 +59,7 @@ Stack cardItem(context, String title, String url, String desc ){
       Container(
         margin: EdgeInsets.symmetric(vertical: x16),
         width: visualWidth(context),
-        height: visualHeight(context) * 0.42,
+        height: visualHeight(context) * 0.46,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
@@ -81,13 +81,14 @@ Stack cardItem(context, String title, String url, String desc ){
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    descText(title),
+                    blackText(title, 16, 4, 24),
                     favouriteButton()
                   ],
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 24),
+                  padding: EdgeInsets.symmetric(horizontal: x24),
                   child: Text(desc,
+                      maxLines: 2,
                       style: greyTextStyle.copyWith(
                           fontSize: 16, fontWeight: medium)),
                 ),
