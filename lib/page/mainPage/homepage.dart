@@ -28,16 +28,13 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           currentCategory = index;
           implementData(index);
-          setState(() {
-            buttonCategory(index);
-            slidingUpPanel(index);
-          });
+          print("pindah halaman $index");
         },
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(x8),
+                    borderRadius: BorderRadius.circular(32),
                     side: const BorderSide(color: Colors.blue)))),
         child: Text(
           category[index],
@@ -51,7 +48,7 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(x8),
+                    borderRadius: BorderRadius.circular(32),
                     side: const BorderSide(color: Colors.blue)))),
         child: Text(
           category[index],

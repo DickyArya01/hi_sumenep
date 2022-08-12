@@ -45,6 +45,7 @@ class _PanelWidgetState extends State<PanelWidget> {
             ),
           ),
           Expanded(
+            flex: 1,
             child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: x16),
                 controller: widget.controller,
@@ -52,7 +53,7 @@ class _PanelWidgetState extends State<PanelWidget> {
                 itemBuilder: (context, int index) => CustomCard(wisata: dataDummmy[index],)),
           ),
           Container(
-            margin: EdgeInsets.only(top: x16),
+            margin: EdgeInsets.only(top: 2),
           )
         ],
       );

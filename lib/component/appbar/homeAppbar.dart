@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
+import 'package:hi_sumenep_app/icon/icon_app_icons.dart';
 
 AppBar homeAppbar() {
   return AppBar(
@@ -31,7 +32,10 @@ AppBar homeAppbar() {
                     filled: true,
                     fillColor: Colors.grey[200],
                     hintText: hintText,
-                    icon: Icon(Icons.abc),
+                    icon: const Icon(
+                      IconApp.iconApp,
+                      color: Colors.blue,
+                      size: 48,),
                   ),
               )),
             ],
