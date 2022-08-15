@@ -28,7 +28,7 @@ class _PanelWidgetState extends State<PanelWidget> {
   @override
   void initState() {
     super.initState();
-    data = implementData(widget.indexCategory);
+    data = dataDummmy;
   }
 
   @override
@@ -53,7 +53,7 @@ class _PanelWidgetState extends State<PanelWidget> {
                 padding: const EdgeInsets.symmetric(horizontal: x16),
                 controller: widget.controller,
                 itemCount: data.length,
-                itemBuilder: (context, int index) => CustomCard(wisata: dataDummmy[index],)),
+                itemBuilder: (context, int index) => CustomCard(wisata: data[index])),
           ),
           Container(
             margin: EdgeInsets.only(top: 2),
