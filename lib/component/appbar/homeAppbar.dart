@@ -17,7 +17,7 @@ AppBar homeAppbar() {
     ), //rubah warna status bar
     elevation: 0, // menghilangkan shadow
     bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(x8),
+        preferredSize: const Size.fromHeight(2),
         child: Container(
           height: 52,
           margin: const EdgeInsets.symmetric(horizontal: x16),
