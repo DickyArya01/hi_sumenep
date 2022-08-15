@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
+import 'package:hi_sumenep_app/page/detail.dart';
 import 'package:http/http.dart' as http;
+import 'package:location/location.dart';
+
 
 class MapSample extends StatefulWidget {
   @override
@@ -56,6 +59,7 @@ class MapSampleState extends State<MapSample> {
       // markers: Set<Marker>.of(marker),
 
       markers: getMarkers(dataDummmy),
+      myLocationEnabled: true,
     );
   }
 
@@ -70,15 +74,20 @@ class MapSampleState extends State<MapSample> {
 
       setState(() {
         markers.add(Marker(
+            infoWindow: InfoWindow(
+              title: items[i].title,
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Detail(wisata: data)));
+              },
+            ),
             markerId: MarkerId('$i'),
             position: LatLng(lat, lon),
-            infoWindow: InfoWindow(
-              title: location,
-            ),
             icon: BitmapDescriptor.defaultMarker));
       });
     }
-
     return markers;
   }
 }
