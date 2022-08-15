@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hi_sumenep_app/page/debug.dart';
-import 'package:hi_sumenep_app/page/debug.dart';
+import 'package:hi_sumenep_app/page/Splashscreen.dart';
 import 'package:hi_sumenep_app/page/home.dart';
 
 void main() {
@@ -21,7 +20,7 @@ class _HiSumenepState extends State<HiSumenep> {
      debugShowCheckedModeBanner: false,
      title: 'Hi Sumenep',
     //  home: HomePage(),\
-    home: MyDebug(),
+    home: Spalashscreen(),
     );
   }
 }
