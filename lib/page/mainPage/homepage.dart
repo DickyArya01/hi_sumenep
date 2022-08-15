@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage> {
       return ElevatedButton(
         onPressed: () {
           currentCategory = index;
-          implementData(index);
           print("pindah halaman $index");
         },
         style: ButtonStyle(

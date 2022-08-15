@@ -15,6 +15,7 @@ List<String> category = [
 ];
 
 class Wisata {
+  int id;
   String title;
   String url;
   String desc;
@@ -23,7 +24,8 @@ class Wisata {
   int category;
 
   Wisata(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.url,
       required this.desc,
       required this.lat,
@@ -32,7 +34,7 @@ class Wisata {
 }
 
 List<Wisata> dataDummmy = [];
-List<Wisata> dataFiltered = [];
+List<Wisata> dataFav = [];
 
 void addData() {
   var random = Random();
@@ -41,6 +43,7 @@ void addData() {
     double lat = -6.673645 - random.nextDouble();
     double lon = 113.25364 + random.nextDouble();
     dataDummmy.add(Wisata(
+        id: i,
         title: 'Data Wisata $i',
         url: url,
         desc:
@@ -48,14 +51,6 @@ void addData() {
         lat: lat,
         lon: lon,
         category: random.nextInt(category.length)));
-  }
-}
-
-List<Wisata> implementData(int index) {
-  if (index == 0) {
-    return dataDummmy;
-  } else {
-    return dataFiltered = dataDummmy.where((i) => i.category == index).toList();
   }
 }
 
