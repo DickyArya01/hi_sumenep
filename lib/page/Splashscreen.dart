@@ -37,16 +37,16 @@ class _SpalashscreenState extends State<Spalashscreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(child: Image.asset("assets/HiSumenep.png", height: 135,)),
+              Expanded(child: Image.asset("assets/HiSumenep.png", width: 128,)),
               Text("from",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black,
+                style: greyTextStyle.copyWith(
+                  fontSize: 14,
+                  fontWeight: bold,
                   letterSpacing: 2,
                 )),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 32),
-                child: Image.asset("assets/Soulofmadura.png", width: 100,),
+                child: Image.asset("assets/Soulofmadura.png", width: 120,),
               )
             ],
           ),
