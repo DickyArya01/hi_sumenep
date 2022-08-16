@@ -14,11 +14,20 @@ List<String> category = [
   'Budaya',
 ];
 
+List<List> listCategory = [];
+
+void addListCategory() {
+  for (var i = 0; i < category.length; i++) {
+    listCategory.add(dataDummmy);
+  }
+}
+
 class Wisata {
   int id;
   String title;
   String url;
   String desc;
+  String price;
   double lat;
   double lon;
   int category;
@@ -28,6 +37,7 @@ class Wisata {
       required this.title,
       required this.url,
       required this.desc,
+      required this.price,
       required this.lat,
       required this.lon,
       required this.category});
@@ -48,6 +58,7 @@ void addData() {
         url: url,
         desc:
             '$i Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla posuere sollicitudin aliquam ultrices sagittis orci a. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Et ultrices neque ornare aenean euismod. Congue mauris rhoncus aenean vel elit scelerisque mauris. Hac habitasse platea dictumst quisque sagittis purus sit. Aliquet eget sit amet tellus cras adipiscing enim eu turpis. Vitae auctor eu augue ut lectus arcu bibendum at. Elit sed vulputate mi sit. Quis hendrerit dolor magna eget. Erat imperdiet sed euismod nisi porta lorem mollis aliquam ut. Sed euismod nisi porta lorem mollis. Vel turpis nunc eget lorem dolor sed. Nam at lectus urna duis convallis convallis tellus id. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo. Quis hendrerit dolor magna eget est lorem ipsum. Ac tortor dignissim convallis aenean et. Non sodales neque sodales ut etiam sit amet nisl. Quis varius quam quisque id.',
+        price: '10.000',
         lat: lat,
         lon: lon,
         category: random.nextInt(category.length)));

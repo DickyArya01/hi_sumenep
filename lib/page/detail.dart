@@ -76,7 +76,17 @@ class _DetailState extends State<Detail> {
                 decoration: const BoxDecoration(
                     color: Colors.white, shape: BoxShape.circle),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (!dataFav.contains(widget.wisata)) {
+                        setState(() {
+                          dataFav.add(widget.wisata);
+                        });
+                      } else {
+                        setState(() {
+                          dataFav.remove(widget.wisata);
+                        });
+                      }
+                    },
                     padding: EdgeInsets.symmetric(horizontal: 2),
                     icon: Icon(
                       Icons.favorite,
@@ -148,7 +158,7 @@ class _DetailState extends State<Detail> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    styleText('IDR 5000', 16, semiBold, kBlackColor),
+                    styleText('IDR ${widget.wisata.price}', 16, semiBold, kBlackColor),
                     styleText('per orang', 12, semiBold, kBlueColor)
                   ],
                 ),
@@ -270,7 +280,8 @@ class _DetailState extends State<Detail> {
                   padding: EdgeInsets.only(right: 8),
                   width: visualWidth(context) * 0.18,
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage('https://www.99.co/blog/indonesia/wp-content/uploads/2022/06/foto-profil-wa-keren-pakai-kacamata.jpg'),
+                    backgroundImage: NetworkImage(
+                        'https://www.99.co/blog/indonesia/wp-content/uploads/2022/06/foto-profil-wa-keren-pakai-kacamata.jpg'),
                   ),
                 ),
                 Column(
@@ -279,18 +290,15 @@ class _DetailState extends State<Detail> {
                     styleText(komen[index].user, 12, semiBold, kBlackColor),
                     styleText('day month year', 10, medium, kGreyColor),
                     Container(
-                      width: visualWidth(context) * 0.7,
-                      child: RichText(
-                        textAlign: TextAlign.justify,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 5,
-                        text: TextSpan(
-                          style: blackTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: medium
-                          ),
-                          text: komen[index].comment
-                        )))
+                        width: visualWidth(context) * 0.7,
+                        child: RichText(
+                            textAlign: TextAlign.justify,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 5,
+                            text: TextSpan(
+                                style: blackTextStyle.copyWith(
+                                    fontSize: 12, fontWeight: medium),
+                                text: komen[index].comment)))
                   ],
                 ),
               ],

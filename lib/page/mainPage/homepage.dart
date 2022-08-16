@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/component/map.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
+import 'package:hi_sumenep_app/page/kategori.dart';
 import 'package:hi_sumenep_app/page/mainPage/slidePanel/panelwidget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -15,7 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   int currentCategory = 0;
 
   @override
@@ -28,7 +28,13 @@ class _HomePageState extends State<HomePage> {
       return ElevatedButton(
         onPressed: () {
           currentCategory = index;
-          print("pindah halaman $index");
+          print(currentCategory);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => KategoriPage(
+                        index: currentCategory,
+                      )));
         },
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -68,9 +74,7 @@ class _HomePageState extends State<HomePage> {
       panelBuilder: (controller) => PanelWidget(
         controller: controller,
         indexCategory: index,
-        onTap: (value) {
-
-        },
+        onTap: (value) {},
       ),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(x24)),
     );
@@ -89,10 +93,8 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.only(left: x16, top: x16),
             child: Text(
               'Kategori',
-              style: blackTextStyle.copyWith(
-                fontSize: 20,
-                fontWeight: semiBold
-              ),
+              style:
+                  blackTextStyle.copyWith(fontSize: 20, fontWeight: semiBold),
             ),
           ),
           Container(
@@ -106,7 +108,8 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) => ButtonTheme(
                           child: Container(
                               padding: (index == category.length - 1)
-                                  ? const EdgeInsets.fromLTRB(x16, x16, x16, x16)
+                                  ? const EdgeInsets.fromLTRB(
+                                      x16, x16, x16, x16)
                                   : const EdgeInsets.fromLTRB(x16, x16, 0, x16),
                               child: buttonCategory(index)))))),
         ],

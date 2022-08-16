@@ -40,21 +40,6 @@ Container blackText(
   );
 }
 
-Container favouriteButton() {
-  return Container(
-    margin: EdgeInsets.only(right: 24, top: 4),
-    child: IconButton(
-        onPressed: () {
-          print('tambahkan ke favorit');
-        },
-        icon: Icon(
-          Icons.favorite,
-          color: Colors.grey,
-          size: 24,
-        )),
-  );
-}
-
 Stack cardItem(context, String title, String url, String desc) {
   return Stack(
     children: [
@@ -80,10 +65,7 @@ Stack cardItem(context, String title, String url, String desc) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 cardImage(context, url),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [blackText(title, 16, 4, 24), favouriteButton()],
-                ),
+                blackText(title, 16, 8, 24),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: x24),
                   child: Text(desc,
@@ -146,31 +128,20 @@ class _CustomCardState extends State<CustomCard> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          blackText(widget.wisata.title, 16, 4, 24),
+                          blackText(widget.wisata.title, 16, 12, 24),
                           Container(
-                            margin: EdgeInsets.only(right: 24, top: 4),
-                            child: IconButton(
-                                onPressed: () {
-                                  if (!dataFav.contains(widget.wisata)) {
-                                    setState(() {
-                                      dataFav.add(widget.wisata);
-                                    });
-                                  } else {
-                                    setState(() {
-                                      dataFav.remove(widget.wisata);
-                                    });
-                                  }
-                                },
-                                icon: Icon(
-                                  Icons.favorite,
-                                  color: Colors.grey,
-                                  size: 24,
-                                )),
+                            margin: EdgeInsets.only(right: 24, top: 12),
+                            child: Text(
+                              'IDR ${widget.wisata.price}',
+                              style: blueTextStyle.copyWith(
+                                  fontSize: 16, fontWeight: semiBold),
+                            ),
                           )
                         ],
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: x24),
+                        margin: EdgeInsets.only(top: 8),
                         child: Text(widget.wisata.desc,
                             maxLines: 2,
                             style: greyTextStyle.copyWith(
