@@ -7,6 +7,7 @@ void main() {
   runApp(const HiSumenep());
   addData();
   addComment();
+  addListCategory();
 }
 
 class HiSumenep extends StatefulWidget {
