@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
               color: kWhiteGreyColor,
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 20),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -49,17 +49,37 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  Padding(padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0)),
+                  Padding(padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0)),
                   Text("Nama Pengguna", 
                   style: blackTextStyle.copyWith(
-                  fontSize: 14,
+                  fontSize: 18,
                   fontWeight: bold,
                   letterSpacing: 2,
                 ))
                 ],
               ),
             ),
-          )
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Material(
+                color: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
+                ),
+                child: Container(
+                  width: visualWidth(context),
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: kWhiteGreyColor
+                  ),
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );
