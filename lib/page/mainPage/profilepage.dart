@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hi_sumenep_app/component/profile_menu_item.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -24,11 +25,12 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Container(
             width: visualWidth(context),
+            height: 280,
             decoration: BoxDecoration(
               color: kWhiteGreyColor,
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
+              padding: EdgeInsetsDirectional.only(top: 20),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -49,37 +51,37 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  Padding(padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0)),
+                  Padding(padding: EdgeInsetsDirectional.only(bottom: 20),),
                   Text("Nama Pengguna", 
                   style: blackTextStyle.copyWith(
-                  fontSize: 18,
-                  fontWeight: bold,
+                  fontSize: 20,
+                  fontWeight: black,
                   letterSpacing: 2,
-                ))
+                  ),
+                ),
                 ],
               ),
             ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Material(
-                color: Colors.transparent,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                ProfileMenuItem(
+                  iconUrl: "assets/HiSumenep.png",
+                  title: "Edit Profile",
                 ),
-                child: Container(
-                  width: visualWidth(context),
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: kWhiteGreyColor
-                  ),
+                ProfileMenuItem(
+                  iconUrl: "assets/HiSumenep.png",
+                  title: "Edit Profile",
                 ),
-              )
-            ],
-          ),
+                ProfileMenuItem(
+                  iconUrl: "assets/HiSumenep.png",
+                  title: "Edit Profile",
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
