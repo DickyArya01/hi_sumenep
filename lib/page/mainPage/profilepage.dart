@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hi_sumenep_app/constant/constant.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,8 +13,55 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) { 
-    return Center(
-      child: Text('Profile'),
-      );
+    // return Center(
+    //   child: Text('Profile'),
+    //   );
+
+    return Scaffold(
+      backgroundColor: kWhiteColor,
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            width: visualWidth(context),
+            decoration: BoxDecoration(
+              color: kWhiteGreyColor,
+            ),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    color: kWhiteColor,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(60),
+                        child: Image.asset(slide, height: 120, width: 120, fit: BoxFit.cover,),
+                      ),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0)),
+                  Text("Nama Pengguna", 
+                  style: blackTextStyle.copyWith(
+                  fontSize: 14,
+                  fontWeight: bold,
+                  letterSpacing: 2,
+                ))
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
 }
 }
