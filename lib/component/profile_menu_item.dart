@@ -15,7 +15,7 @@ class ProfileMenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        bottom: 30,
+        bottom: 20,
       ),
       child: Row(
         children: [

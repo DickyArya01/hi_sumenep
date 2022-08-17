@@ -14,10 +14,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) { 
-    // return Center(
-    //   child: Text('Profile'),
-    //   );
-
     return Scaffold(
       backgroundColor: kWhiteColor,
       body: Column(
@@ -25,12 +21,16 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Container(
             width: visualWidth(context),
-            height: 280,
-            decoration: BoxDecoration(
-              color: kWhiteGreyColor,
+            height: visualHeight(context)*0.35,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/banner_profile.png')
+              )
+
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.only(top: 20),
+              padding: EdgeInsetsDirectional.only(top: 8),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -44,14 +44,19 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: BorderRadius.circular(60),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+                      padding: EdgeInsetsDirectional.all(3),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(60),
-                        child: Image.asset(slide, height: 120, width: 120, fit: BoxFit.cover,),
+                        child: Image.asset(
+                          slide,
+                          height: visualWidth(context)*0.3,
+                          width: visualWidth(context)*0.3,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
-                  Padding(padding: EdgeInsetsDirectional.only(bottom: 20),),
+                  Padding(padding: EdgeInsetsDirectional.only(bottom: 16),),
                   Text("Nama Pengguna", 
                   style: blackTextStyle.copyWith(
                   fontSize: 20,
@@ -64,9 +69,10 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
+                SizedBox(height: 20),
                 ProfileMenuItem(
                   iconUrl: "assets/HiSumenep.png",
                   title: "Edit Profile",
@@ -78,12 +84,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 ProfileMenuItem(
                   iconUrl: "assets/HiSumenep.png",
                   title: "Edit Profile",
-                )
+                ),
+
               ],
             ),
-          )
+          ),
+          
         ],
       ),
+
     );
 }
 }
