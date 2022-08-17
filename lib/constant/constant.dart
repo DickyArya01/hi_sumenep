@@ -21,7 +21,7 @@ double visualWidth(context) {
 const String google_api_key = "AIzaSyBoTwTtRhDRCLzK-BXserBNwHpJGMiLEi4";
 
 const String logo = 'assets/logo.png';
-const String slide= 'assets/slide.png';
+const String slide = 'assets/slide.png';
 
 const String url = 'https://source.unsplash.com/user/c_v_r/1900x800';
 
@@ -29,6 +29,8 @@ const String url = 'https://source.unsplash.com/user/c_v_r/1900x800';
 const String hintText = 'Mau kemana hari ini ?';
 const String panelSlideHint = 'wisata';
 
+const String favouriteAdded = 'Ditambahkan ke favourite';
+const String favouriteRemoved = 'Dihapus dari favourite';
 
 //theme
 
@@ -40,6 +42,7 @@ Color kWhiteGreyColor = Color(0xffF1F1F5);
 Color kWhiteColor = Color(0xffFFFFFF);
 Color kBlueColor = Color(0xff1581B7);
 Color kDarkBackgroundColor = Color(0xff252836);
+Color kGreenColor = Color(0xff3CB371);
 
 TextStyle blackTextStyle = GoogleFonts.poppins(
   color: kBlackColor,
@@ -69,5 +72,3 @@ FontWeight medium = FontWeight.w500;
 FontWeight semiBold = FontWeight.w600;
 FontWeight bold = FontWeight.w700;
 FontWeight black = FontWeight.w900;
-
-
