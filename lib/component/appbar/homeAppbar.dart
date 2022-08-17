@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -23,25 +22,30 @@ AppBar homeAppbar() {
           margin: const EdgeInsets.symmetric(horizontal: x16),
           child: Row(
             children: [
+              Container(
+                margin: const EdgeInsets.only(right: x8),
+                decoration: BoxDecoration(
+                    color: kBlueColor, shape: BoxShape.circle),
+                child: Icon(
+                  IconApp.iconApp,
+                  color: kWhiteColor,
+                  size: 48,
+                ),
+              ),
               Expanded(
                   child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(x24),
-                        borderSide: BorderSide.none),
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    hintText: hintText,
-                    hintStyle: greyTextStyle,
-                    icon: Icon(
-                      IconApp.iconApp,
-                      color: kBlueColor,
-                      size: 48,),
-                  ),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(x24),
+                      borderSide: BorderSide.none),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  hintText: hintText,
+                  hintStyle: greyTextStyle,
+                ),
               )),
             ],
           ),
         )),
   );
 }
-
