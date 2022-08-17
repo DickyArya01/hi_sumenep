@@ -1,11 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
+import 'package:hi_sumenep_app/component/customButton.dart';
 import 'package:hi_sumenep_app/component/map.dart';
 import 'package:hi_sumenep_app/component/travel.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
@@ -47,9 +49,34 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
+  bool isFavourited = false;
   int activePhotoIndex = 0;
   int indexKiri = -2;
   int indexKanan = -1;
+
+  SnackBar snackBar(String text, Color color) {
+    return SnackBar(
+      content: Text(
+        text,
+        style: whiteTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+      ),
+      backgroundColor: color,
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (dataFav.contains(widget.wisata)) {
+      isFavourited = true;
+    }
+  }
+
+  void onPress() {
+    print("di click");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,18 +107,29 @@ class _DetailState extends State<Detail> {
                       if (!dataFav.contains(widget.wisata)) {
                         setState(() {
                           dataFav.add(widget.wisata);
+                          isFavourited = true;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              snackBar(favouriteAdded, kGreenColor));
                         });
                       } else {
                         setState(() {
                           dataFav.remove(widget.wisata);
+                          isFavourited = false;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              snackBar(favouriteRemoved, Colors.redAccent));
                         });
                       }
                     },
                     padding: EdgeInsets.symmetric(horizontal: 2),
-                    icon: Icon(
-                      Icons.favorite,
-                      color: Colors.grey,
-                    )))
+                    icon: (isFavourited == false)
+                        ? const Icon(
+                            Icons.favorite,
+                            color: Colors.grey,
+                          )
+                        : const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          )))
           ],
           backgroundColor: Colors.white,
           shadowColor: Colors.white,
@@ -158,7 +196,8 @@ class _DetailState extends State<Detail> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    styleText('IDR ${widget.wisata.price}', 16, semiBold, kBlackColor),
+                    styleText('IDR ${widget.wisata.price}', 16, semiBold,
+                        kBlackColor),
                     styleText('per orang', 12, semiBold, kBlueColor)
                   ],
                 ),
@@ -208,17 +247,9 @@ class _DetailState extends State<Detail> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  textStyle: whiteTextStyle.copyWith(
-                      fontSize: 14, fontWeight: semiBold)),
-              onPressed: () {},
-              child: Container(
-                  padding: EdgeInsets.symmetric(vertical: x16),
-                  child: Text('Tampilkan fasilitas lainnya')),
-            ),
-          ),
+              padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
+              child: customButton('Tampilkan fasilitas lainnya', kBlueColor,
+                  BorderSide.none, whiteTextStyle, 14, semiBold, onPress())),
           Container(),
           Container(
             padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
