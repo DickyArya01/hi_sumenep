@@ -123,3 +123,4 @@ List<Travel> travel = [
   Travel(name: 'Travel', link: 'link wa'),
   Travel(name: 'Travel', link: 'link wa'),
 ];
+
