@@ -43,6 +43,7 @@ Color kWhiteColor = Color(0xffFFFFFF);
 Color kBlueColor = Color(0xff1581B7);
 Color kDarkBackgroundColor = Color(0xff252836);
 Color kGreenColor = Color(0xff3CB371);
+Color kRedColor = Color(0xffFF314A);
 
 TextStyle blackTextStyle = GoogleFonts.poppins(
   color: kBlackColor,
@@ -64,6 +65,9 @@ TextStyle whiteTextStyle = GoogleFonts.poppins(
 );
 TextStyle blueTextStyle = GoogleFonts.poppins(
   color: kBlueColor,
+);
+TextStyle redTextStyle = GoogleFonts.nunito(
+  color: kRedColor,
 );
 
 FontWeight light = FontWeight.w300;

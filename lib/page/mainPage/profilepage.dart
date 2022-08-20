@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hi_sumenep_app/component/customButton.dart';
 import 'package:hi_sumenep_app/component/profile_menu_item.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 
@@ -10,6 +11,10 @@ class ProfilePage extends StatefulWidget {
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
+
+void onPress() {
+    print("di click");
+  }
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
@@ -79,20 +84,24 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 ProfileMenuItem(
                   iconUrl: "assets/HiSumenep.png",
-                  title: "Edit Profile",
+                  title: "Ajukan Wisata Baru",
                 ),
-                ProfileMenuItem(
-                  iconUrl: "assets/HiSumenep.png",
-                  title: "Edit Profile",
-                ),
-
+                SizedBox(height: 8),
+                Container(
+                  width: visualWidth(context),
+                  child: 
+                  Text(
+                    "Logout",
+                    style: redTextStyle.copyWith(
+                      fontSize: 18,
+                      fontWeight: semiBold,),
+                  ),
+                )
               ],
             ),
           ),
-          
         ],
       ),
-
     );
-}
+  }
 }

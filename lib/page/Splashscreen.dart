@@ -38,7 +38,7 @@ class _SpalashscreenState extends State<Spalashscreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(child: Image.asset("assets/HiSumenep.png", width: 128,)),
-              Text("from",
+              Text("by",
                 style: greyTextStyle.copyWith(
                   fontSize: 14,
                   fontWeight: bold,
