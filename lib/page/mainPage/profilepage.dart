@@ -85,14 +85,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   iconUrl: "assets/HiSumenep.png",
                   title: "Edit Profile",
                 ),
-
               ],
             ),
           ),
-          
         ],
       ),
-
     );
-}
+  }
 }
