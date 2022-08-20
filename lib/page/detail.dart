@@ -11,6 +11,7 @@ import 'package:hi_sumenep_app/component/customButton.dart';
 import 'package:hi_sumenep_app/component/map.dart';
 import 'package:hi_sumenep_app/component/travel.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
+import 'package:hi_sumenep_app/page/komentar.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 Text styleText(String text, double size, FontWeight weight, Color color) {
@@ -236,11 +237,11 @@ class _DetailState extends State<Detail> {
                         Text(
                           '\u2022',
                           style: blackTextStyle.copyWith(
-                              fontSize: 12, fontWeight: medium),
+                              fontSize: 14, fontWeight: medium),
                         ),
-                        Text(fasilitas[index].name,
+                        Text(' ${fasilitas[index].name}',
                             style: blueTextStyle.copyWith(
-                                fontSize: 12, fontWeight: medium))
+                                fontSize: 14, fontWeight: medium))
                       ],
                     );
                   }),
@@ -250,7 +251,6 @@ class _DetailState extends State<Detail> {
               padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
               child: customButton('Tampilkan fasilitas lainnya', kBlueColor,
                   BorderSide.none, whiteTextStyle, 14, semiBold, onPress())),
-          Container(),
           Container(
             padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
             child: Column(
@@ -294,48 +294,71 @@ class _DetailState extends State<Detail> {
               ],
             ),
           ),
+          Divider(
+            height: x16,
+            thickness: 1,
+            indent: x16,
+            endIndent: 20,
+            color: kGreyColor,
+          ),
           Container(
             padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
-            child: styleText('Komentar', 14, semiBold, kBlackColor),
-          )
-        ])),
-        SliverList(
-            delegate: SliverChildBuilderDelegate(childCount: komen.length,
-                (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: x8, horizontal: x8),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: EdgeInsets.only(right: 8),
-                  width: visualWidth(context) * 0.18,
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        'https://www.99.co/blog/indonesia/wp-content/uploads/2022/06/foto-profil-wa-keren-pakai-kacamata.jpg'),
+                styleText('Komentar', 14, semiBold, kBlackColor),
+                Padding(
+                  padding: EdgeInsets.only(left: x16),
+                  child: Text(
+                    '${komen.length}',
+                    style: greyTextStyle.copyWith(
+                        fontSize: 14, fontWeight: semiBold),
                   ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    styleText(komen[index].user, 12, semiBold, kBlackColor),
-                    styleText('day month year', 10, medium, kGreyColor),
-                    Container(
-                        width: visualWidth(context) * 0.7,
-                        child: RichText(
-                            textAlign: TextAlign.justify,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 5,
-                            text: TextSpan(
-                                style: blackTextStyle.copyWith(
-                                    fontSize: 12, fontWeight: medium),
-                                text: komen[index].comment)))
-                  ],
-                ),
+                )
               ],
             ),
-          );
-        })),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => TestMe()));
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: x8, horizontal: x8),
+              margin: const EdgeInsets.only(bottom: x16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(right: 8),
+                    width: visualWidth(context) * 0.18,
+                    child: CircleAvatar(
+                      backgroundColor: kGreyColor,
+                      backgroundImage: NetworkImage(
+                          'https://www.99.co/blog/indonesia/wp-content/uploads/2022/06/foto-profil-wa-keren-pakai-kacamata.jpg'),
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      styleText(komen[0].user, 12, semiBold, kBlackColor),
+                      styleText('day month year', 10, medium, kGreyColor),
+                      Container(
+                          width: visualWidth(context) * 0.7,
+                          child: RichText(
+                              textAlign: TextAlign.justify,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 5,
+                              text: TextSpan(
+                                  style: blackTextStyle.copyWith(
+                                      fontSize: 12, fontWeight: medium),
+                                  text: komen[0].comment)))
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          )
+        ])),
       ],
     ));
   }
