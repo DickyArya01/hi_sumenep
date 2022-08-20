@@ -13,6 +13,7 @@ import 'package:hi_sumenep_app/component/travel.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/page/komentar.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:video_player/video_player.dart';
 
 Text styleText(String text, double size, FontWeight weight, Color color) {
   return Text(
@@ -55,6 +56,8 @@ class _DetailState extends State<Detail> {
   int indexKiri = -2;
   int indexKanan = -1;
 
+  late VideoPlayerController _videoPlayerController;
+
   SnackBar snackBar(String text, Color color) {
     return SnackBar(
       content: Text(
@@ -72,6 +75,12 @@ class _DetailState extends State<Detail> {
     if (dataFav.contains(widget.wisata)) {
       isFavourited = true;
     }
+
+    _videoPlayerController = VideoPlayerController.network(
+      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+    )..initialize().then((value) {
+        setState(() {});
+      });
   }
 
   void onPress() {
@@ -218,6 +227,57 @@ class _DetailState extends State<Detail> {
             ),
           ),
           Container(
+              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+              height: visualHeight(context) * 0.4,
+              child: Container(
+                width: visualWidth(context),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    _videoPlayerController.value.isInitialized
+                        ? AspectRatio(
+                            aspectRatio:
+                                _videoPlayerController.value.aspectRatio,
+                            child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _videoPlayerController.value.isPlaying
+                                        ? _videoPlayerController.pause()
+                                        : _videoPlayerController.play();
+                                  });
+                                },
+                                child: VideoPlayer(_videoPlayerController)),
+                          )
+                        : Container(
+                            height: visualHeight(context) * 0.3,
+                            width: visualWidth(context),
+                            color: kGreyColor,
+                            child: const Center(
+                              child: Icon(
+                                Icons.play_arrow,
+                                size: 64,
+                              ),
+                            ),
+                          ),
+                    GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _videoPlayerController.value.isPlaying
+                                ? _videoPlayerController.pause()
+                                : _videoPlayerController.play();
+                          });
+                        },
+                        child: _videoPlayerController.value.isPlaying
+                            ? Container()
+                            : Icon(
+                                Icons.play_arrow,
+                                color: kWhiteColor,
+                                size: 64,
+                              ))
+                  ],
+                ),
+              )),
+          Container(
             padding: EdgeInsets.symmetric(horizontal: x16),
             margin: EdgeInsets.only(top: x16),
             child: styleText('Fasilitas', 14, semiBold, kBlackColor),
@@ -301,65 +361,76 @@ class _DetailState extends State<Detail> {
             endIndent: 20,
             color: kGreyColor,
           ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
-            child: Row(
-              children: [
-                styleText('Komentar', 14, semiBold, kBlackColor),
-                Padding(
-                  padding: EdgeInsets.only(left: x16),
-                  child: Text(
-                    '${komen.length}',
-                    style: greyTextStyle.copyWith(
-                        fontSize: 14, fontWeight: semiBold),
-                  ),
-                )
-              ],
-            ),
-          ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => TestMe()));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => TestMe()));
             },
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: x8, horizontal: x8),
-              margin: const EdgeInsets.only(bottom: x16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(right: 8),
-                    width: visualWidth(context) * 0.18,
-                    child: CircleAvatar(
-                      backgroundColor: kGreyColor,
-                      backgroundImage: NetworkImage(
-                          'https://www.99.co/blog/indonesia/wp-content/uploads/2022/06/foto-profil-wa-keren-pakai-kacamata.jpg'),
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: x8, horizontal: x16),
+                  child: Row(
                     children: [
-                      styleText(komen[0].user, 12, semiBold, kBlackColor),
-                      styleText('day month year', 10, medium, kGreyColor),
-                      Container(
-                          width: visualWidth(context) * 0.7,
-                          child: RichText(
-                              textAlign: TextAlign.justify,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 5,
-                              text: TextSpan(
-                                  style: blackTextStyle.copyWith(
-                                      fontSize: 12, fontWeight: medium),
-                                  text: komen[0].comment)))
+                      styleText('Komentar', 14, semiBold, kBlackColor),
+                      Padding(
+                        padding: EdgeInsets.only(left: x16),
+                        child: Text(
+                          '${komen.length}',
+                          style: greyTextStyle.copyWith(
+                              fontSize: 14, fontWeight: semiBold),
+                        ),
+                      )
                     ],
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: x8, horizontal: x8),
+                  margin: const EdgeInsets.only(bottom: x16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(right: 8),
+                        width: visualWidth(context) * 0.18,
+                        child: CircleAvatar(
+                          backgroundColor: kGreyColor,
+                          backgroundImage: NetworkImage(
+                              'https://www.99.co/blog/indonesia/wp-content/uploads/2022/06/foto-profil-wa-keren-pakai-kacamata.jpg'),
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          styleText(komen[0].user, 12, semiBold, kBlackColor),
+                          styleText('day month year', 10, medium, kGreyColor),
+                          Container(
+                              width: visualWidth(context) * 0.7,
+                              child: RichText(
+                                  textAlign: TextAlign.justify,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 5,
+                                  text: TextSpan(
+                                      style: blackTextStyle.copyWith(
+                                          fontSize: 12, fontWeight: medium),
+                                      text: komen[0].comment)))
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           )
         ])),
       ],
     ));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }
