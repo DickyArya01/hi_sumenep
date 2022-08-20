@@ -4,6 +4,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/component/customButton.dart';
 import 'package:hi_sumenep_app/component/profile_menu_item.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
+import 'package:hi_sumenep_app/page/home.dart';
+import 'package:hi_sumenep_app/page/login_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,8 +14,8 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-void onPress() {
-    print("di click");
+onPress(context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()) );
   }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -81,10 +83,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ProfileMenuItem(
                   iconUrl: "assets/HiSumenep.png",
                   title: "Edit Profile",
+                  refer: 0,
                 ),
                 ProfileMenuItem(
                   iconUrl: "assets/HiSumenep.png",
                   title: "Ajukan Wisata Baru",
+                  refer: 1,
+
                 ),
                 SizedBox(height: 8),
                 Container(
