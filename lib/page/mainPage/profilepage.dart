@@ -34,7 +34,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 fit: BoxFit.cover,
                 image: AssetImage('assets/banner_profile.png')
               )
-
             ),
             child: Padding(
               padding: EdgeInsetsDirectional.only(top: 8),
