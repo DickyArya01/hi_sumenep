@@ -15,8 +15,12 @@ class ProfileMenuItem extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: kWhiteColor,
+        elevation: 0, 
+      ),
+      onPressed: () {
         switch (refer) {
           case 0:
             Navigator.push(context,
@@ -31,9 +35,7 @@ class ProfileMenuItem extends StatelessWidget {
         }
       },
       child: Container(
-        margin: const EdgeInsets.only(
-          bottom: 16,
-        ),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
           children: [
             Container(
@@ -51,7 +53,7 @@ class ProfileMenuItem extends StatelessWidget {
                 fontWeight: semiBold,
               ),
             ),
-            const Spacer(),
+            const Spacer(flex: 1),
             Icon(
               Icons.chevron_right,
               color: kBlueColor,

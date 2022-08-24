@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/component/appbar/favouriteAppbar.dart';
 import 'package:hi_sumenep_app/component/appbar/homeAppbar.dart';
 import 'package:hi_sumenep_app/component/appbar/profileAppbar.dart';
 import 'package:hi_sumenep_app/component/navbar.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
+import 'package:hi_sumenep_app/page/login_page.dart';
 import 'package:hi_sumenep_app/page/mainPage/favouritepage.dart';
 import 'package:hi_sumenep_app/page/mainPage/homepage.dart';
 import 'package:hi_sumenep_app/page/mainPage/profilepage.dart';
-
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -29,6 +30,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   void _selectedTab(int index) {
     setState(() {
       selectedIndex = index;
+      if (selectedIndex == 2) {
+        if (isLogin) {
+          selectedIndex = index;
+        } else {
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const SignInPage()), (route) => true);
+          selectedIndex = 0;
+        }
+      }
     });
   }
 
@@ -37,7 +46,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       selectedIndex = index;
     });
   }
-
 
   itemNavbar(double value) {
     return AnimatedContainer(
@@ -67,19 +75,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     profileAppbar()
   ];
 
-  final List<Widget> _children = [
-    HomePage(),
-    FavouritePage(),
-    ProfilePage()
-  ];
+  final List<Widget> _children = [HomePage(), FavouritePage(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appbar[selectedIndex],
-      body: _children[selectedIndex],
-      bottomNavigationBar:  itemNavbar(kBottomNavigationBarHeight)
-      // bottomNavigationBar: const Navbar()
-    );
+        appBar: _appbar[selectedIndex],
+        body: _children[selectedIndex],
+        bottomNavigationBar: itemNavbar(kBottomNavigationBarHeight)
+        // bottomNavigationBar: const Navbar()
+        );
   }
 }

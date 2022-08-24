@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/page/home.dart';
 
@@ -40,6 +41,19 @@ class _SignInPageState extends State<SignInPage> {
           passwordInput(),
           rememberCheckbox(),
           loginButton(),
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            child: Center(
+              child: TextButton(
+                onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home())),
+                child: Text(
+                  'Lain Kali',
+                  style: blueTextStyle.copyWith(
+                    fontSize: 16, fontWeight: medium
+                  ),),
+              ),
+            ),
+          ),
           Center(
             child: Container(
               margin: const EdgeInsets.only(
@@ -224,7 +238,8 @@ class _SignInPageState extends State<SignInPage> {
             setState(() {
               isLoading = false;
             });
-            if (passwordController.text != 'admin' || usernameController.text != 'admin') {
+            if (passwordController.text != 'admin' ||
+                usernameController.text != 'admin') {
               setState(() {
                 isPasswordWrong = true;
               });
@@ -234,7 +249,8 @@ class _SignInPageState extends State<SignInPage> {
                 gravity: ToastGravity.BOTTOM,
               );
             } else {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const Home()), (route) => false);
+              isLogin = true;
             }
           });
         },
@@ -296,7 +312,7 @@ class _SignInPageState extends State<SignInPage> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        'Password Salah',
+        'Username atau password Salah',
         style: whiteTextStyle.copyWith(
           fontSize: 16,
           fontWeight: semiBold,

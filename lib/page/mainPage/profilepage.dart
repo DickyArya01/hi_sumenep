@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/component/customButton.dart';
 import 'package:hi_sumenep_app/component/profile_menu_item.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
@@ -15,12 +16,13 @@ class ProfilePage extends StatefulWidget {
 }
 
 onPress(context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()) );
-  }
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => SignInPage()));
+}
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kWhiteColor,
       body: Column(
@@ -28,13 +30,11 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Container(
             width: visualWidth(context),
-            height: visualHeight(context)*0.35,
+            height: visualHeight(context) * 0.35,
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/banner_profile.png')
-              )
-            ),
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/banner_profile.png'))),
             child: Padding(
               padding: EdgeInsetsDirectional.only(top: 8),
               child: Column(
@@ -55,30 +55,33 @@ class _ProfilePageState extends State<ProfilePage> {
                         borderRadius: BorderRadius.circular(60),
                         child: Image.asset(
                           slide,
-                          height: visualWidth(context)*0.3,
-                          width: visualWidth(context)*0.3,
+                          height: visualWidth(context) * 0.3,
+                          width: visualWidth(context) * 0.3,
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
                   ),
-                  Padding(padding: EdgeInsetsDirectional.only(bottom: 16),),
-                  Text("Nama Pengguna", 
-                  style: blackTextStyle.copyWith(
-                  fontSize: 20,
-                  fontWeight: black,
-                  letterSpacing: 2,
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(bottom: 16),
                   ),
-                ),
+                  Text(
+                    "Nama Pengguna",
+                    style: blackTextStyle.copyWith(
+                      fontSize: 20,
+                      fontWeight: black,
+                      letterSpacing: 2,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Column(
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: 12),
                 ProfileMenuItem(
                   iconUrl: "assets/HiSumenep.png",
                   title: "Edit Profile",
@@ -88,18 +91,22 @@ class _ProfilePageState extends State<ProfilePage> {
                   iconUrl: "assets/HiSumenep.png",
                   title: "Ajukan Wisata Baru",
                   refer: 1,
-
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInPage())),
+                  onTap: () {
+                    isLogin = false;
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
+                  },
                   child: Container(
-                    margin: const EdgeInsets.only(top: 8),
+                    margin: const EdgeInsets.only(top: 8, left: 16),
                     width: visualWidth(context),
                     child: Text(
                       "Logout",
                       style: redTextStyle.copyWith(
                         fontSize: 18,
-                        fontWeight: semiBold,),
+                        fontWeight: semiBold,
+                      ),
                     ),
                   ),
                 )
