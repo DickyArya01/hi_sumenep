@@ -41,6 +41,19 @@ class _SignInPageState extends State<SignInPage> {
           passwordInput(),
           rememberCheckbox(),
           loginButton(),
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            child: Center(
+              child: TextButton(
+                onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home())),
+                child: Text(
+                  'Lain Kali',
+                  style: blueTextStyle.copyWith(
+                    fontSize: 16, fontWeight: medium
+                  ),),
+              ),
+            ),
+          ),
           Center(
             child: Container(
               margin: const EdgeInsets.only(
@@ -236,8 +249,7 @@ class _SignInPageState extends State<SignInPage> {
                 gravity: ToastGravity.BOTTOM,
               );
             } else {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const Home()));
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const Home()), (route) => false);
               isLogin = true;
             }
           });

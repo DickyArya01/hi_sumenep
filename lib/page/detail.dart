@@ -114,7 +114,10 @@ class _DetailState extends State<Detail> {
                     color: Colors.white, shape: BoxShape.circle),
                 child: IconButton(
                     onPressed: () {
-                      if (!dataFav.contains(widget.wisata)) {
+                      if (!isLogin) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            snackBar(notLogin, Colors.redAccent));
+                      } else if (!dataFav.contains(widget.wisata)) {
                         setState(() {
                           dataFav.add(widget.wisata);
                           isFavourited = true;

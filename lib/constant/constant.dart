@@ -31,6 +31,7 @@ const String panelSlideHint = 'wisata';
 
 const String favouriteAdded = 'Ditambahkan ke favourite';
 const String favouriteRemoved = 'Dihapus dari favourite';
+const String notLogin = "Login terlebih dahulu untuk menyimpan favourite";
 
 //theme
 
