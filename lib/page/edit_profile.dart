@@ -68,13 +68,22 @@ class _editProfileState extends State<editProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kWhiteColor,
         appBar: AppBar(
-          title: Center(
-            child: Text(
-              'Edit Profile',
-              style:
-                  blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+          leadingWidth: 40,
+          leading: Container(
+            child: IconButton(
+              onPressed: () => Navigator.pop(context), 
+              color: kBlackColor,
+              icon: Icon(Icons.arrow_back)),
+          ),
+          title: Container(
+            padding: const EdgeInsets.only(right: 40),
+            child: Center(
+              child: Text(
+                'Edit Profile',
+                style:
+                    blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+              ),
             ),
           ),
           backgroundColor: Colors.white,
