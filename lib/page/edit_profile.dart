@@ -18,6 +18,7 @@ void onPress() {
 
 class _editProfileState extends State<editProfile> {
   final UsernameController = TextEditingController(text: '');
+  final passwordController = TextEditingController(text: '');
 
   Widget UsernameInput() {
     return Container(
@@ -33,7 +34,7 @@ class _editProfileState extends State<editProfile> {
         controller: UsernameController,
         decoration: InputDecoration(
           labelText: "Username",
-          labelStyle: greyTextStyle.copyWith(
+          labelStyle: blueTextStyle.copyWith(
             fontSize: 16,
             fontWeight: semiBold,
           ),
@@ -51,7 +52,7 @@ class _editProfileState extends State<editProfile> {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: kWhiteGreyColor,
+              color: kBlueColor,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(14),
@@ -60,8 +61,71 @@ class _editProfileState extends State<editProfile> {
           fillColor: kWhiteColor,
           contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
         ),
-        style: greyTextStyle,
+        style: greyTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
       ),
+    );
+  }
+
+  Widget PasswordInput() {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(
+            top: 16,
+          ),
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: kWhiteColor,
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                  child: TextFormField(
+                controller: UsernameController,
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  labelStyle: blueTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: semiBold,
+                  ),
+                  hintText: 'Password',
+                  hintStyle: greyTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: semiBold,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: kLineDarkColor,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: kBlueColor,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  filled: true,
+                  fillColor: kWhiteColor,
+                  contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                  suffixIcon: InkWell(
+                    
+                    child: Icon(
+                      Icons.visibility_outlined,
+                      color: kGreyColor,
+                    ),
+                  ),
+                ),
+                style:
+                    greyTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+              )),
+            ],
+          ),
+        )
+      ],
     );
   }
 
@@ -118,6 +182,10 @@ class _editProfileState extends State<editProfile> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: UsernameInput(),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: PasswordInput(),
             ),
           ],
         ));

@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/page/edit_profile.dart';
 import 'package:hi_sumenep_app/page/home.dart';
+import 'package:hi_sumenep_app/page/login_page.dart';
 import 'package:hi_sumenep_app/page/mainPage/homepage.dart';
 
 class Spalashscreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _SpalashscreenState extends State<Spalashscreen> {
    @override
   void initState(){
     Timer(Duration(seconds: 3),(){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => editProfile()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInPage()));
     });
     super.initState();
   }
