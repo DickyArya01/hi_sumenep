@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/page/edit_profile.dart';
 import 'package:hi_sumenep_app/page/home.dart';
+import 'package:hi_sumenep_app/page/login_page.dart';
 import 'package:hi_sumenep_app/page/mainPage/homepage.dart';
 
 class Splashscreen extends StatefulWidget {
