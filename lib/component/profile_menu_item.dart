@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/page/edit_profile.dart';
-import 'package:hi_sumenep_app/page/login_page.dart';
 import 'package:hi_sumenep_app/page/pengajuan.dart';
 
 class ProfileMenuItem extends StatelessWidget {
@@ -18,16 +17,17 @@ class ProfileMenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(refer);
         switch (refer) {
           case 0:
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const editProfile()));
             break;
           case 1:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const AjuWisata()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const AjuWisata()));
             break;
           default:
+            break;
         }
       },
       child: Container(
@@ -37,7 +37,7 @@ class ProfileMenuItem extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              margin: EdgeInsets.only(right: 20),
+              margin: const EdgeInsets.only(right: 20),
               child: Image.asset(
                 iconUrl,
                 width: 24,
@@ -51,7 +51,7 @@ class ProfileMenuItem extends StatelessWidget {
                 fontWeight: semiBold,
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Icon(
               Icons.chevron_right,
               color: kBlueColor,

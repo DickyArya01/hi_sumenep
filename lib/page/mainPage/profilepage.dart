@@ -90,15 +90,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   refer: 1,
 
                 ),
-                SizedBox(height: 8),
-                Container(
-                  width: visualWidth(context),
-                  child: 
-                  Text(
-                    "Logout",
-                    style: redTextStyle.copyWith(
-                      fontSize: 18,
-                      fontWeight: semiBold,),
+                GestureDetector(
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInPage())),
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 8),
+                    width: visualWidth(context),
+                    child: Text(
+                      "Logout",
+                      style: redTextStyle.copyWith(
+                        fontSize: 18,
+                        fontWeight: semiBold,),
+                    ),
                   ),
                 )
               ],
