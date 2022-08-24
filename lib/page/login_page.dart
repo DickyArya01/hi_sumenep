@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/page/home.dart';
 
@@ -224,7 +225,8 @@ class _SignInPageState extends State<SignInPage> {
             setState(() {
               isLoading = false;
             });
-            if (passwordController.text != 'admin' || usernameController.text != 'admin') {
+            if (passwordController.text != 'admin' ||
+                usernameController.text != 'admin') {
               setState(() {
                 isPasswordWrong = true;
               });
@@ -234,7 +236,9 @@ class _SignInPageState extends State<SignInPage> {
                 gravity: ToastGravity.BOTTOM,
               );
             } else {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const Home()));
+              isLogin = true;
             }
           });
         },
@@ -296,7 +300,7 @@ class _SignInPageState extends State<SignInPage> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        'Password Salah',
+        'Username atau password Salah',
         style: whiteTextStyle.copyWith(
           fontSize: 16,
           fontWeight: semiBold,

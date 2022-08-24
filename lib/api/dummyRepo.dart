@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/icon/icon_fasilitas_icons.dart';
 
+bool isLogin = false;
+
 List<String> category = [
   'Semua',
   'Rekomendasi',
