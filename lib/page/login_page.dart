@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
+import 'package:hi_sumenep_app/page/home.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -11,10 +12,11 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   late FToast fToast;
-  final emailController = TextEditingController(text: '');
+  final usernameController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
 
-  bool isShowPasswordError = false;
+  bool isShowPassword = false;
+  bool isPasswordWrong = false;
   bool isRememberMe = false;
   bool isLoading = false;
 
@@ -29,18 +31,18 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 24,
         ),
         children: [
           title(),
-          emailInput(),
+          usernameInput(),
           passwordInput(),
           rememberCheckbox(),
           loginButton(),
           Center(
             child: Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: 24,
               ),
             ),
@@ -53,7 +55,7 @@ class _SignInPageState extends State<SignInPage> {
 
   Widget title() {
     return Container(
-      margin: EdgeInsets.only(top: 84),
+      margin: const EdgeInsets.only(top: 84),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -64,7 +66,7 @@ class _SignInPageState extends State<SignInPage> {
               fontWeight: bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
@@ -72,7 +74,7 @@ class _SignInPageState extends State<SignInPage> {
               Container(
                 width: 87,
                 height: 4,
-                margin: EdgeInsets.only(right: 4),
+                margin: const EdgeInsets.only(right: 4),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                   color: kBlueColor,
@@ -93,18 +95,18 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget emailInput() {
+  Widget usernameInput() {
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         top: 48,
       ),
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: kWhiteGreyColor,
         borderRadius: BorderRadius.circular(14),
       ),
       child: TextFormField(
-        controller: emailController,
+        controller: usernameController,
         decoration: InputDecoration.collapsed(
           hintText: 'Username',
           hintStyle: greyTextStyle.copyWith(
@@ -121,10 +123,10 @@ class _SignInPageState extends State<SignInPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             top: 32,
           ),
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: kWhiteGreyColor,
             borderRadius: BorderRadius.circular(14),
@@ -133,7 +135,7 @@ class _SignInPageState extends State<SignInPage> {
             children: [
               Expanded(
                 child: TextFormField(
-                  obscureText: true,
+                  obscureText: (isShowPassword) ? false : true,
                   controller: passwordController,
                   decoration: InputDecoration.collapsed(
                     hintText: 'Password',
@@ -144,18 +146,25 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ),
               ),
-              Icon(
-                Icons.visibility_outlined,
-                color: kGreyColor,
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    isShowPassword = !isShowPassword;
+                  });
+                  print(isShowPassword);
+                },
+                icon: (isShowPassword)
+                    ? iconShowPassword(Icons.visibility_off_outlined)
+                    : iconShowPassword(Icons.visibility_outlined),
               ),
             ],
           ),
         ),
-        if (isShowPasswordError)
+        if (isPasswordWrong)
           Container(
-            margin: EdgeInsets.only(top: 8),
+            margin: const EdgeInsets.only(top: 8),
             child: Text(
-              'Password kamu salah',
+              'Username atau password kamu salah',
               style: redTextStyle,
             ),
           ),
@@ -163,9 +172,16 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
+  Widget iconShowPassword(IconData iconData) {
+    return Icon(
+      iconData,
+      color: kGreyColor,
+    );
+  }
+
   Widget rememberCheckbox() {
     return Container(
-      margin: EdgeInsets.only(top: 32),
+      margin: const EdgeInsets.only(top: 32),
       child: Row(
         children: [
           SizedBox(
@@ -183,7 +199,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text(
             'Remember me',
             style: blueTextStyle,
@@ -197,28 +213,28 @@ class _SignInPageState extends State<SignInPage> {
     return Container(
       height: 56,
       width: double.infinity,
-      margin: EdgeInsets.only(top: 32),
+      margin: const EdgeInsets.only(top: 32),
       child: TextButton(
         onPressed: () {
           setState(() {
             isLoading = true;
           });
 
-          Future.delayed(Duration(seconds: 2), () {
+          Future.delayed(const Duration(seconds: 2), () {
             setState(() {
               isLoading = false;
             });
-            if (passwordController.text != '123123') {
+            if (passwordController.text != 'admin' || usernameController.text != 'admin') {
               setState(() {
-                isShowPasswordError = true;
+                isPasswordWrong = true;
               });
               fToast.showToast(
                 child: errorToast(),
-                toastDuration: Duration(seconds: 2),
+                toastDuration: const Duration(seconds: 2),
                 gravity: ToastGravity.BOTTOM,
               );
             } else {
-              Navigator.pushNamed(context, '/home');
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
             }
           });
         },
@@ -246,7 +262,7 @@ class _SignInPageState extends State<SignInPage> {
 
   Widget registerButton() {
     return Container(
-      margin: EdgeInsets.only(top: 24),
+      margin: const EdgeInsets.only(top: 24),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -274,7 +290,7 @@ class _SignInPageState extends State<SignInPage> {
 
   Widget errorToast() {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: kRedColor,
         borderRadius: BorderRadius.circular(10),

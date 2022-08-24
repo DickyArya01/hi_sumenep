@@ -34,7 +34,7 @@ class _KategoriPageState extends State<KategoriPage> {
               const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
           child: IconButton(
             padding: const EdgeInsets.symmetric(horizontal: 2),
-            color: Colors.black,
+            color: kBlackColor,
             icon: const Icon(Icons.arrow_back),
             iconSize: 20,
             onPressed: () => Navigator.of(context).pop(),

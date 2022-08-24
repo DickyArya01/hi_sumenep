@@ -23,7 +23,7 @@ class _SpalashscreenState extends State<Spalashscreen> {
    @override
   void initState(){
     Timer(Duration(seconds: 3),(){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInPage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home()));
     });
     super.initState();
   }
