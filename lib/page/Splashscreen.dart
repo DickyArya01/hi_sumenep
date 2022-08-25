@@ -10,14 +10,14 @@ import 'package:hi_sumenep_app/page/home.dart';
 import 'package:hi_sumenep_app/page/login_page.dart';
 import 'package:hi_sumenep_app/page/mainPage/homepage.dart';
 
-class Spalashscreen extends StatefulWidget {
-  const Spalashscreen({Key? key}) : super(key: key);
+class Splashscreen extends StatefulWidget {
+  const Splashscreen({Key? key}) : super(key: key);
 
   @override
-  State<Spalashscreen> createState() => _SpalashscreenState();
+  State<Splashscreen> createState() => _SplashscreenState();
 }
 
-class _SpalashscreenState extends State<Spalashscreen> {
+class _SplashscreenState extends State<Splashscreen> {
   String? get imageUrl => null;
 
    @override

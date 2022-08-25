@@ -23,7 +23,7 @@ class _HiSumenepState extends State<HiSumenep> {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Hi Sumenep',
-      home: Spalashscreen(),
+      home: Splashscreen(),
     );
   }
 }
