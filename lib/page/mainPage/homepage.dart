@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   ElevatedButton buttonCategory(int index) {
     if (currentCategory != index) {
       return ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           currentCategory = index;
           print(currentCategory);
           Navigator.push(
