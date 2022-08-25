@@ -30,7 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Container(
             width: visualWidth(context),
-            height: visualHeight(context) * 0.35,
+            height: visualHeight(context) * 0.45,
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
@@ -47,16 +47,16 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: kWhiteColor,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(60),
+                      borderRadius: BorderRadius.circular(120),
                     ),
                     child: Padding(
                       padding: EdgeInsetsDirectional.all(3),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(60),
+                        borderRadius: BorderRadius.circular(120),
                         child: Image.asset(
                           slide,
-                          height: visualWidth(context) * 0.3,
-                          width: visualWidth(context) * 0.3,
+                          height: 160,
+                          width: 160,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -83,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 SizedBox(height: 12),
                 ProfileMenuItem(
-                  iconUrl: "assets/HiSumenep.png",
+                  iconUrl: slide,
                   title: "Edit Profile",
                   refer: 0,
                 ),

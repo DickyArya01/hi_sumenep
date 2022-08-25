@@ -23,6 +23,7 @@ const String google_api_key = "AIzaSyBoTwTtRhDRCLzK-BXserBNwHpJGMiLEi4";
 const String logo = 'assets/logo.png';
 const String slide = 'assets/slide.png';
 
+
 const String url = 'https://source.unsplash.com/user/c_v_r/1900x800';
 
 // Text
@@ -36,7 +37,7 @@ const String notLogin = "Login terlebih dahulu untuk menyimpan favourite";
 //theme
 
 Color kBlackColor = Color(0xff222222);
-Color kBlackAccentColor = Color(0xff2A2B37);
+Color kBlackAccentColor = Color.fromARGB(255, 50, 51, 63);
 Color kGreyColor = Color(0xff94959B);
 Color kLineDarkColor = Color(0xffEAEAEA);
 Color kWhiteGreyColor = Color(0xffF1F1F5);
