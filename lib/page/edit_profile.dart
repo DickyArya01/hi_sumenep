@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/component/customButton.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
+import 'package:image_picker/image_picker.dart';
 
 class editProfile extends StatefulWidget {
   const editProfile({Key? key}) : super(key: key);
@@ -17,55 +20,93 @@ void onPress() {
 }
 
 class _editProfileState extends State<editProfile> {
+  
+  late PickedFile _imageFile;
+  final ImagePicker _picker = ImagePicker();
+
   final UsernameController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
   final ConfirmpasswordController = TextEditingController(text: '');
 
   bool isShowPassword = false;
 
+  void takePhoto() async {
+    final XFile? _gambar = await _picker.pickImage(source: ImageSource.camera);
+    // _cropImage(_gambar?.path);
+    Navigator.pop(context);
+    setState(() {
+      
+    });
+  }
+
+  void pickPhoto() async {
+    final XFile? _gambar = await _picker.pickImage(source: ImageSource.gallery);
+    // _cropImage(_gambar?.path);
+    Navigator.pop(context);
+    setState(() {
+      _imageFile = XFile as PickedFile;
+    });
+  }
+
+  // void _cropImage(filepath)async{
+  //   CroppedFile? cropedImage = await ImageCropper().cropImage(
+  //       sourcePath: filepath,
+  //       compressFormat: ImageCompressFormat.jpg,
+  //       compressQuality: 100,
+  //   );
+  //   if (cropedImage != null) {
+  //     setState(() {
+  //       // _imageFile = filepath;
+  //       _imageFile = File(cropedImage.path) as PickedFile;
+  //     });
+  //   }
+  // }
+
   Widget UsernameInput() {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 24,
-      ),
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: kWhiteColor,
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: TextFormField(
-        controller: UsernameController,
-        decoration: InputDecoration(
-          labelText: "Username",
-          labelStyle: blueTextStyle.copyWith(
-            fontSize: 14,
-            fontWeight: semiBold,
-          ),
-          hintText: 'Username',
-          hintStyle: greyTextStyle.copyWith(
-            fontSize: 16,
-            fontWeight: semiBold,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: kLineDarkColor,
-              width: 2,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: kWhiteColor,
             borderRadius: BorderRadius.circular(14),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: kBlueColor,
-              width: 2,
+          child: TextFormField(
+            controller: UsernameController,
+            decoration: InputDecoration(
+              labelText: "Nama Lengkap",
+              labelStyle: blueTextStyle.copyWith(
+                fontSize: 14,
+                fontWeight: semiBold,
+              ),
+              hintText: 'Nama Lengkap',
+              hintStyle: greyTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: semiBold,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: kLineDarkColor,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: kBlueColor,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              filled: true,
+              fillColor: kWhiteColor,
+              contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
             ),
-            borderRadius: BorderRadius.circular(14),
+            style: blueTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
           ),
-          filled: true,
-          fillColor: kWhiteColor,
-          contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
         ),
-        style: greyTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
-      ),
+      ],
     );
   }
 
@@ -74,7 +115,7 @@ class _editProfileState extends State<editProfile> {
       children: [
         Container(
           margin: EdgeInsets.only(
-            top: 4,
+            top: 16,
           ),
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -131,11 +172,21 @@ class _editProfileState extends State<editProfile> {
                   ),
                 ),
                 style:
-                    greyTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+                    blueTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
               )),
             ],
           ),
-        )
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: SizedBox(
+            width: visualWidth(context),
+            child: Text(
+                "Data anda tidak akan berubah jika InputText dibiarkan kosong",
+                maxLines: 3,
+                style: blackAccentTextStyle),
+          ),
+        ),
       ],
     );
   }
@@ -212,34 +263,52 @@ class _editProfileState extends State<editProfile> {
   }
 
   Widget imageProfile() {
-    return Center(
-      child: Stack(
-        children: <Widget>[
-          CircleAvatar(
-            radius: 80,
-            backgroundImage: AssetImage("assets/slide.png"),
-          ),
-          Positioned(
-              bottom: 20,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      child: Center(
+        child: Stack(
+          children: <Widget>[
+            CircleAvatar(
+              radius: 80,
+              backgroundImage: AssetImage("assets/slide.png"),
+            ),
+            Positioned(
+              bottom: 4,
               right: -2,
               child: InkWell(
                 onTap: () {
                   showModalBottomSheet(
-                    context: context, 
-                    builder: (Builder) => bottomSheet(),);
+                    context: context,
+                    builder: (Builder) => ImagebottomSheet(),
+                  );
                 },
-                child: Icon(
-                  Icons.camera_alt,
+                child: Card(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
                   color: kBlueColor,
-                  size: 28,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.all(12),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(60),
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: kWhiteColor,
+                          size: 24,
+                        )),
+                  ),
                 ),
-              )),
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget bottomSheet() {
+  Widget ImagebottomSheet() {
     return Container(
       height: 100,
       width: visualWidth(context),
@@ -248,7 +317,7 @@ class _editProfileState extends State<editProfile> {
         children: [
           Text(
             "Pilih foto anda",
-            style: blackTextStyle.copyWith(fontSize: 20,fontWeight: medium),
+            style: blackTextStyle.copyWith(fontSize: 20, fontWeight: medium),
           ),
           SizedBox(
             height: 20,
@@ -257,26 +326,30 @@ class _editProfileState extends State<editProfile> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  primary: kWhiteColor,
-                  elevation: 0
-                ),
+                  style: ElevatedButton.styleFrom(
+                      primary: kWhiteColor, elevation: 0),
                   onPressed: () {
-
+                    takePhoto();
                   },
-                  icon: Icon(Icons.camera_alt,color: kBlackAccentColor,),
-                  label: Text("Camera",style: blackAccentTextStyle)),
-                  
+                  icon: Icon(
+                    Icons.camera_alt,
+                    color: kBlackAccentColor,
+                  ),
+                  label: Text("Camera", style: blackAccentTextStyle)),
               ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  primary: kWhiteColor,
-                  elevation: 0
-                ),
+                  style: ElevatedButton.styleFrom(
+                      primary: kWhiteColor, elevation: 0),
                   onPressed: () {
-
+                    pickPhoto();
                   },
-                  icon: Icon(Icons.image, color: kBlackAccentColor,),
-                  label: Text("Camera", style: blackAccentTextStyle,)),
+                  icon: Icon(
+                    Icons.image,
+                    color: kBlackAccentColor,
+                  ),
+                  label: Text(
+                    "Galery",
+                    style: blackAccentTextStyle,
+                  )),
             ],
           )
         ],
@@ -315,23 +388,28 @@ class _editProfileState extends State<editProfile> {
             statusBarBrightness: Brightness.light,
           ),
         ),
-
         body: ListView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 24,
-          ),
           children: [
             imageProfile(),
             UsernameInput(),
             PasswordInput(),
-            customButton("Simpan Perubahan", kBlueColor, BorderSide.none,
-                whiteTextStyle, 14, semiBold, onPress()),
-            SizedBox(
-              height: 20,
+            Container(
+              margin: EdgeInsets.fromLTRB(16, 20, 16, 0),
+              width: visualWidth(context),
+              child: customButton("Simpan Perubahan", kBlueColor,
+                  BorderSide.none, whiteTextStyle, 14, semiBold, onPress()),
             ),
-            customButton("Simpan Perubahan", kBlueColor, BorderSide.none,
-                whiteTextStyle, 14, semiBold, onPress()),
+            Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  "Batal",
+                  style:
+                      greyTextStyle.copyWith(fontWeight: medium, fontSize: 16),
+                ),
+              ),
+            ),
           ],
         ));
   }

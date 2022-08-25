@@ -40,6 +40,7 @@ class ProfileMenuItem extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(right: 20),
+              
               child: Image.asset(
                 iconUrl,
                 width: 24,
