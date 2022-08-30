@@ -21,21 +21,25 @@ class _FavouritePageState extends State<FavouritePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: x16),
-          itemCount: dataFav.length,
-          itemBuilder: (context, int index) => Dismissible(
-                key: Key(dataFav[index].title),
-                onDismissed: (direction) {
-                  setState(() {
-                    dataFav.removeAt(index);
-                  });
-                },
-                child: CustomCard(
-                  wisata: dataFav[index],
-                ),
-              )),
-    );
+    return (dataFav.isNotEmpty)
+        ? Center(
+            child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: x16),
+                itemCount: dataFav.length,
+                itemBuilder: (context, int index) => Dismissible(
+                      key: Key(dataFav[index].title),
+                      onDismissed: (direction) {
+                        setState(() {
+                          dataFav.removeAt(index);
+                        });
+                      },
+                      child: CustomCard(
+                        wisata: dataFav[index],
+                      ),
+                    )),
+          )
+        : Center(
+            child: Text('Anda belum menambahkan favourite'),
+          );
   }
 }

@@ -18,12 +18,13 @@ class HiSumenep extends StatefulWidget {
 }
 
 class _HiSumenepState extends State<HiSumenep> {
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Hi Sumenep',
-      home: Spalashscreen(),
+      home: Splashscreen(),
     );
   }
 }

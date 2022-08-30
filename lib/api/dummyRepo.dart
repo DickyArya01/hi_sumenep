@@ -1,9 +1,17 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/icon/icon_fasilitas_icons.dart';
+import 'package:hi_sumenep_app/page/kategori.dart';
+import 'package:http/http.dart';
+
+bool isLogin = false;
+
+String api = 'http://192.168.0.185:5000/';
 
 List<String> category = [
   'Semua',
@@ -100,7 +108,7 @@ List<Fasilitas> fasilitas = [
 ];
 
 List<String> images = [
-  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+  'https://imagesy.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
   'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
   'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
   'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
@@ -123,3 +131,39 @@ List<Travel> travel = [
   Travel(name: 'Travel', link: 'link wa'),
   Travel(name: 'Travel', link: 'link wa'),
 ];
+
+class Data {
+  int id;
+  String title;
+  String url;
+  String desc;
+  double price;
+  double lat;
+  double lon;
+  int category;
+
+  Data(
+      {required this.id,
+      required this.title,
+      required this.url,
+      required this.desc,
+      required this.price,
+      required this.lat,
+      required this.lon,
+      required this.category});
+
+  factory Data.fromJson(List<dynamic> json) {
+    return Data(
+        id: json[0],
+        title: json[1],
+        url:
+            'https://imagesy.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+        desc: json[2],
+        price: json[6],
+        lat: json[3],
+        lon: json[4],
+        category: json[5]);
+  }
+}
+
+

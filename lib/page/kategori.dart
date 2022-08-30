@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
+import 'package:hi_sumenep_app/component/card%20copy.dart';
 import 'package:hi_sumenep_app/component/card.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
-
+import 'package:http/http.dart';
 
 class KategoriPage extends StatefulWidget {
   int index;
@@ -16,11 +19,30 @@ class KategoriPage extends StatefulWidget {
 }
 
 class _KategoriPageState extends State<KategoriPage> {
+  List<Data> dataWisata = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    fetchKategori(widget.index);
+    print(dataWisata);
+  }
+
+  fetchKategori(int index) async {
+    final response =
+        await get(Uri.parse('http://192.168.0.185:5000/kategori/$index'));
+
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      setState(() {
+        dataWisata = (responseJson[0]['data'] as List)
+            .map((e) => Data.fromJson(e))
+            .toList();
+      });
+    } else {
+      throw Exception('gagal ${response.statusCode}');
+    }
   }
 
   @override
@@ -34,7 +56,7 @@ class _KategoriPageState extends State<KategoriPage> {
               const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
           child: IconButton(
             padding: const EdgeInsets.symmetric(horizontal: 2),
-            color: Colors.black,
+            color: kBlackColor,
             icon: const Icon(Icons.arrow_back),
             iconSize: 20,
             onPressed: () => Navigator.of(context).pop(),
@@ -60,9 +82,9 @@ class _KategoriPageState extends State<KategoriPage> {
       body: Center(
         child: ListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: x16),
-          itemCount: listCategory[widget.index].length,
-          itemBuilder: (context, int index) => CustomCard(
-            wisata: listCategory[widget.index][index],
+          itemCount: dataWisata.length,
+          itemBuilder: (context, int index) => CustomCard1(
+            wisata: dataWisata[index],
           ),
         ),
       ),
