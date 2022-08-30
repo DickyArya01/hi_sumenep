@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/page/home.dart';
+import 'package:hi_sumenep_app/page/register_page.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -291,7 +292,9 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupPage()));
+            },
             child: Text(
               'Register',
               style: blueTextStyle.copyWith(
