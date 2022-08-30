@@ -18,10 +18,11 @@ class Spalashscreen extends StatefulWidget {
 class _SpalashscreenState extends State<Spalashscreen> {
   String? get imageUrl => null;
 
-   @override
-  void initState(){
-    Timer(Duration(seconds: 3),(){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+  @override
+  void initState() {
+    Timer(Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Home()));
     });
     super.initState();
   }
@@ -29,29 +30,34 @@ class _SpalashscreenState extends State<Spalashscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: null,
-      backgroundColor: Colors.white,
-      body: Container(
-        child: Center(
+        appBar: null,
+        backgroundColor: Colors.white,
+        body: Container(
+            child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(child: Image.asset("assets/HiSumenep.png", width: 128,)),
+              Expanded(
+                  child: Image.asset(
+                "assets/HiSumenep.png",
+                width: 128,
+              )),
               Text("from",
-                style: greyTextStyle.copyWith(
-                  fontSize: 14,
-                  fontWeight: bold,
-                  letterSpacing: 2,
-                )),
+                  style: greyTextStyle.copyWith(
+                    fontSize: 14,
+                    fontWeight: bold,
+                    letterSpacing: 2,
+                  )),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 32),
-                child: Image.asset("assets/Soulofmadura.png", width: 120,),
+                child: Image.asset(
+                  "assets/Soulofmadura.png",
+                  width: 120,
+                ),
               )
             ],
           ),
-        )
-      )
-    );
+        )));
   }
 }
