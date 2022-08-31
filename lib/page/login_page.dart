@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
-import 'package:hi_sumenep_app/page/home.dart';
-import 'package:hi_sumenep_app/page/register_page.dart';
+import '../page/register_page.dart';
+import 'home.dart';
+
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);

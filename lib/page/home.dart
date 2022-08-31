@@ -10,10 +10,11 @@ import 'package:hi_sumenep_app/component/appbar/homeAppbar.dart';
 import 'package:hi_sumenep_app/component/appbar/profileAppbar.dart';
 import 'package:hi_sumenep_app/component/navbar.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
-import 'package:hi_sumenep_app/page/login_page.dart';
 import 'package:hi_sumenep_app/page/mainPage/favouritepage.dart';
 import 'package:hi_sumenep_app/page/mainPage/homepage.dart';
-import 'package:hi_sumenep_app/page/mainPage/profilepage.dart';
+import 'login_page.dart';
+import 'mainPage/profilepage.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

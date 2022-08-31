@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
-import 'package:hi_sumenep_app/page/edit_profile.dart';
-import 'package:hi_sumenep_app/page/home.dart';
-import 'package:hi_sumenep_app/page/login_page.dart';
-import 'package:hi_sumenep_app/page/mainPage/homepage.dart';
+
+import 'home.dart';
+
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({Key? key}) : super(key: key);
