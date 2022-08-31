@@ -34,7 +34,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         if (isLogin) {
           selectedIndex = index;
         } else {
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const SignInPage()), (route) => true);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInPage(),));
           selectedIndex = 0;
         }
       }

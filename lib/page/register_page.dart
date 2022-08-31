@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hi_sumenep_app/page/home.dart';
+import 'package:hi_sumenep_app/page/login_page.dart';
 
 import '../component/customButton.dart';
 import '../constant/constant.dart';
@@ -15,9 +17,6 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  void onPress() {
-    print("di click");
-  }
 
   late FToast fToast;
   final usernameController = TextEditingController(text: '');
@@ -29,6 +28,18 @@ class _SignupPageState extends State<SignupPage> {
   bool isPasswordWrong = false;
   bool isRememberMe = false;
   bool isLoading = false;
+
+   @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
+
+  onPress() {
+    // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => SignInPage(),), (route) => false);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage(),));
+  }
 
   Widget title() {
     return Container(
@@ -113,7 +124,8 @@ class _SignupPageState extends State<SignupPage> {
               fillColor: kWhiteColor,
               contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
             ),
-            style: blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+            style: blackAccentTextStyle.copyWith(
+                fontSize: 16, fontWeight: semiBold),
           ),
         ),
       ],
@@ -132,6 +144,7 @@ class _SignupPageState extends State<SignupPage> {
           ),
           child: TextFormField(
             controller: usernameController,
+            maxLength: 16,
             decoration: InputDecoration(
               labelText: "Username",
               labelStyle: blueTextStyle.copyWith(
@@ -161,7 +174,8 @@ class _SignupPageState extends State<SignupPage> {
               fillColor: kWhiteColor,
               contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
             ),
-            style: blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+            style: blackAccentTextStyle.copyWith(
+                fontSize: 16, fontWeight: semiBold),
           ),
         ),
       ],
@@ -173,7 +187,7 @@ class _SignupPageState extends State<SignupPage> {
       children: [
         Container(
           margin: EdgeInsets.only(
-            top: 24,
+            top: 4,
           ),
           decoration: BoxDecoration(
             color: kWhiteColor,
@@ -185,6 +199,9 @@ class _SignupPageState extends State<SignupPage> {
                   child: TextFormField(
                 obscureText: (isShowPassword) ? false : true,
                 controller: PasswordController,
+                validator: (value){
+                  return value!.length < 8 ? 'isi dengan minimal 8 karakter': null;
+                },
                 decoration: InputDecoration(
                   labelText: "Password",
                   labelStyle: blueTextStyle.copyWith(
@@ -218,7 +235,6 @@ class _SignupPageState extends State<SignupPage> {
                       setState(() {
                         isShowPassword = !isShowPassword;
                       });
-                      print(isShowPassword);
                     },
                     child: Icon(
                       isShowPassword
@@ -228,8 +244,8 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                 ),
-                style:
-                    blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+                style: blackAccentTextStyle.copyWith(
+                    fontSize: 16, fontWeight: semiBold),
               )),
             ],
           ),
@@ -298,8 +314,8 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                 ),
-                style:
-                    blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+                style: blackAccentTextStyle.copyWith(
+                    fontSize: 16, fontWeight: semiBold),
               )),
             ],
           ),
@@ -356,7 +372,10 @@ class _SignupPageState extends State<SignupPage> {
             Padding(
               padding: EdgeInsets.only(top: 8),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => Home(),));
+                  Navigator.pop(context);
+                },
                 child: Text(
                   "Batal",
                   style:
@@ -368,3 +387,4 @@ class _SignupPageState extends State<SignupPage> {
         ));
   }
 }
+

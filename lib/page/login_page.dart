@@ -148,45 +148,7 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24,
-        ),
-        children: [
-          title(),
-          UsernameInput(),
-          PasswordInput(),
-          rememberCheckbox(),
-          loginButton(),
-          Container(
-            margin: const EdgeInsets.only(top: 8),
-            child: Center(
-              child: TextButton(
-                onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home())),
-                child: Text(
-                  'Lain Kali',
-                  style: blueTextStyle.copyWith(
-                    fontSize: 16, fontWeight: medium
-                  ),),
-              ),
-            ),
-          ),
-          Center(
-            child: Container(
-              margin: const EdgeInsets.only(
-                top: 24,
-              ),
-            ),
-          ),
-          registerButton(),
-        ],
-      ),
-    );
-  }
-
+ 
   Widget title() {
     return Container(
       margin: const EdgeInsets.only(top: 84),
@@ -368,7 +330,6 @@ class _SignInPageState extends State<SignInPage> {
                 toastDuration: const Duration(seconds: 2),
                 gravity: ToastGravity.BOTTOM,
               );
-              //
             } else {
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const Home()), (route) => false);
               isLogin = true;
@@ -412,7 +373,7 @@ class _SignInPageState extends State<SignInPage> {
           ),
           TextButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()));
             },
             child: Text(
               'Register',
@@ -443,4 +404,44 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
   }
+
+   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+        ),
+        children: [
+          title(),
+          UsernameInput(),
+          PasswordInput(),
+          rememberCheckbox(),
+          loginButton(),
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            child: Center(
+              child: TextButton(
+                onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home())),
+                child: Text(
+                  'Lain Kali',
+                  style: blueTextStyle.copyWith(
+                    fontSize: 16, fontWeight: medium
+                  ),),
+              ),
+            ),
+          ),
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(
+                top: 24,
+              ),
+            ),
+          ),
+          registerButton(),
+        ],
+      ),
+    );
+  }
+
 }
