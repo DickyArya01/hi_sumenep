@@ -17,7 +17,6 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-
   late FToast fToast;
   final usernameController = TextEditingController(text: '');
   final NameController = TextEditingController(text: '');
@@ -25,18 +24,17 @@ class _SignupPageState extends State<SignupPage> {
   final ConfirmPasswordController = TextEditingController(text: '');
 
   bool isShowPassword = false;
+  bool isShowPasswordConfirm = false;
   bool isPasswordWrong = false;
   bool isRememberMe = false;
   bool isLoading = false;
 
-   @override
+  @override
   void initState() {
     super.initState();
     fToast = FToast();
     fToast.init(context);
   }
-
-
 
   Widget title() {
     return Container(
@@ -193,57 +191,56 @@ class _SignupPageState extends State<SignupPage> {
           child: Row(
             children: [
               Expanded(
-                  child: TextFormField(
-                obscureText: (isShowPassword) ? false : true,
-                controller: PasswordController,
-                validator: (value){
-                  return value!.length < 8 ? 'isi dengan minimal 8 karakter': null;
-                },
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  labelStyle: blueTextStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: semiBold,
-                  ),
-                  hintText: 'Isi password anda',
-                  hintStyle: greyTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: kLineDarkColor,
-                      width: 2,
+                child: TextFormField(
+                  obscureText: (isShowPassword) ? false : true,
+                  controller: PasswordController,
+                  decoration: InputDecoration(
+                    labelText: "Password",
+                    labelStyle: blueTextStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: semiBold,
                     ),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: kBlueColor,
-                      width: 2,
+                    hintText: 'Isi password anda',
+                    hintStyle: greyTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
                     ),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  filled: true,
-                  fillColor: kWhiteColor,
-                  contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      setState(() {
-                        isShowPassword = !isShowPassword;
-                      });
-                    },
-                    child: Icon(
-                      isShowPassword
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
-                      color: kGreyColor,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: kLineDarkColor,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: kBlueColor,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    filled: true,
+                    fillColor: kWhiteColor,
+                    contentPadding:
+                        EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                    suffixIcon: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isShowPassword = !isShowPassword;
+                        });
+                      },
+                      child: Icon(
+                        isShowPassword
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                        color: kGreyColor,
+                      ),
                     ),
                   ),
+                  style: blackAccentTextStyle.copyWith(
+                      fontSize: 16, fontWeight: semiBold),
                 ),
-                style: blackAccentTextStyle.copyWith(
-                    fontSize: 16, fontWeight: semiBold),
-              )),
+              ),
             ],
           ),
         ),
@@ -266,7 +263,7 @@ class _SignupPageState extends State<SignupPage> {
             children: [
               Expanded(
                   child: TextFormField(
-                obscureText: (isShowPassword) ? false : true,
+                obscureText: (isShowPasswordConfirm) ? false : true,
                 controller: ConfirmPasswordController,
                 decoration: InputDecoration(
                   labelText: "Konfirmasi Password",
@@ -299,12 +296,11 @@ class _SignupPageState extends State<SignupPage> {
                   suffixIcon: InkWell(
                     onTap: () {
                       setState(() {
-                        isShowPassword = !isShowPassword;
+                        isShowPasswordConfirm = !isShowPasswordConfirm;
                       });
-                      print(isShowPassword);
                     },
                     child: Icon(
-                      isShowPassword
+                      isShowPasswordConfirm
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
                       color: kGreyColor,
@@ -329,7 +325,7 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  Widget errorToast() {
+  Widget errorToast(text) {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -337,11 +333,93 @@ class _SignupPageState extends State<SignupPage> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        'password anda tidak sama',
+        text,
         style: whiteTextStyle.copyWith(
           fontSize: 16,
           fontWeight: semiBold,
         ),
+      ),
+    );
+  }
+
+  void toast(text) {
+    setState(() {
+      isPasswordWrong = true;
+    });
+    fToast.showToast(
+      child: errorToast(text),
+      toastDuration: const Duration(seconds: 2),
+      gravity: ToastGravity.BOTTOM,
+    );
+  }
+
+  Widget registerbutton() {
+    return Container(
+      height: 56,
+      width: double.infinity,
+      margin: const EdgeInsets.only(top: 32),
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            isLoading = true;
+          });
+
+          Future.delayed(const Duration(seconds: 2), () {
+            setState(() {
+              isLoading = false;
+            });
+            // if (NameController.text != 'admin' ||
+            //     usernameController.text != 'admin' ||
+            //     PasswordController.text != '1122334' ||
+            //     ConfirmPasswordController.text != '11223344') {
+            //   setState(() {
+            //     isPasswordWrong = true;
+            //   });
+            //   fToast.showToast(
+            //     child: errorToast(),
+            //     toastDuration: const Duration(seconds: 2),
+            //     gravity: ToastGravity.BOTTOM,
+            //   );
+            //   //
+            // } else {
+            //   Navigator.pushAndRemoveUntil(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => const Home()),
+            //       (route) => false);
+            //   isLogin = true;
+            // }
+            if (NameController.text.isEmpty ||
+                usernameController.text.isEmpty ||
+                PasswordController.text.isEmpty ||
+                ConfirmPasswordController.text.isEmpty) {
+              toast('Tolong isi form dengan benar');
+            } else if (PasswordController.text.length < 8) {
+              toast('Passmord minimal 8 karakter');
+            } else if(PasswordController.text != ConfirmPasswordController.text){
+              toast('Password anda tidak sama');
+            }else{
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home(),));
+            }
+          });
+        },
+        style: TextButton.styleFrom(
+          backgroundColor: kBlueColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+        ),
+        child: isLoading
+            ? CircularProgressIndicator(
+                color: kWhiteColor,
+                backgroundColor: kBlackColor,
+              )
+            : Text(
+                'Register',
+                style: whiteTextStyle.copyWith(
+                  fontSize: 18,
+                  fontWeight: semiBold,
+                ),
+              ),
       ),
     );
   }
@@ -378,64 +456,4 @@ class _SignupPageState extends State<SignupPage> {
           ],
         ));
   }
-
-  Widget registerbutton() {
-    return Container(
-      height: 56,
-      width: double.infinity,
-      margin: const EdgeInsets.only(top: 32),
-      child: TextButton(
-        onPressed: () {
-          setState(() {
-            isLoading = true;
-          });
-
-          Future.delayed(const Duration(seconds: 2), () {
-            setState(() {
-              isLoading = false;
-            });
-            if (NameController.text != 'admin' ||
-                usernameController.text != 'admin' ||
-                PasswordController.text != '1122334' ||
-                ConfirmPasswordController.text != '11223344') {
-              setState(() {
-                isPasswordWrong = true;
-              });
-              fToast.showToast(
-                child: errorToast(),
-                toastDuration: const Duration(seconds: 2),
-                gravity: ToastGravity.BOTTOM,
-              );
-              //
-            } else {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Home()),
-                  (route) => false);
-              isLogin = true;
-            }
-          });
-        },
-        style: TextButton.styleFrom(
-          backgroundColor: kBlueColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-        ),
-        child: isLoading
-            ? CircularProgressIndicator(
-                color: kWhiteColor,
-                backgroundColor: kBlackColor,
-              )
-            : Text(
-                'Register',
-                style: whiteTextStyle.copyWith(
-                  fontSize: 18,
-                  fontWeight: semiBold,
-                ),
-              ),
-      ),
-    );
-  }
 }
-
