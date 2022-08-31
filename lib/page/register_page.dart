@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -16,9 +15,8 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-
   void onPress() {
-  print("di click");
+    print("di click");
   }
 
   late FToast fToast;
@@ -92,7 +90,7 @@ class _SignupPageState extends State<SignupPage> {
                 fontSize: 14,
                 fontWeight: semiBold,
               ),
-              hintText: 'Isi nama lengkap anda ...',
+              hintText: 'Isi nama lengkap anda',
               hintStyle: greyTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: semiBold,
@@ -115,7 +113,7 @@ class _SignupPageState extends State<SignupPage> {
               fillColor: kWhiteColor,
               contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
             ),
-            style: blueTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+            style: blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
           ),
         ),
       ],
@@ -127,7 +125,7 @@ class _SignupPageState extends State<SignupPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.only(top: 16),
+          margin: EdgeInsets.only(top: 24),
           decoration: BoxDecoration(
             color: kWhiteColor,
             borderRadius: BorderRadius.circular(14),
@@ -140,7 +138,7 @@ class _SignupPageState extends State<SignupPage> {
                 fontSize: 14,
                 fontWeight: semiBold,
               ),
-              hintText: 'Isi username anda ...',
+              hintText: 'Isi username anda',
               hintStyle: greyTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: semiBold,
@@ -163,13 +161,12 @@ class _SignupPageState extends State<SignupPage> {
               fillColor: kWhiteColor,
               contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
             ),
-            style: blueTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+            style: blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
           ),
         ),
       ],
     );
   }
-
 
   Widget PasswordInput() {
     return Column(
@@ -194,7 +191,7 @@ class _SignupPageState extends State<SignupPage> {
                     fontSize: 14,
                     fontWeight: semiBold,
                   ),
-                  hintText: 'Isi password anda ...',
+                  hintText: 'Isi password anda',
                   hintStyle: greyTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: semiBold,
@@ -232,7 +229,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 style:
-                    blueTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+                    blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
               )),
             ],
           ),
@@ -302,7 +299,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 style:
-                    greyTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+                    blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
               )),
             ],
           ),
@@ -339,24 +336,24 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kWhiteColor,
+        backgroundColor: kWhiteColor,
         body: ListView(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
-      ),
-      children: [
-        title(),
-        NameInput(),
-        UsernameInput(),
-        PasswordInput(),
-        ConfirmPasswordInput(),
-        Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+          ),
+          children: [
+            title(),
+            NameInput(),
+            UsernameInput(),
+            PasswordInput(),
+            ConfirmPasswordInput(),
+            Container(
               margin: EdgeInsets.only(top: 32),
               width: visualWidth(context),
-              child: customButton("Register", kBlueColor,
-                  BorderSide.none, whiteTextStyle, 18, semiBold, onPress()),
+              child: customButton("Register", kBlueColor, BorderSide.none,
+                  whiteTextStyle, 18, semiBold, onPress()),
             ),
-        Padding(
+            Padding(
               padding: EdgeInsets.only(top: 8),
               child: TextButton(
                 onPressed: () {},
@@ -367,7 +364,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
             ),
-      ],
-    ));
+          ],
+        ));
   }
 }

@@ -29,6 +29,125 @@ class _SignInPageState extends State<SignInPage> {
     fToast.init(context);
   }
 
+  Widget UsernameInput() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 48),
+          decoration: BoxDecoration(
+            color: kWhiteColor,
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: TextFormField(
+            controller: usernameController,
+            decoration: InputDecoration(
+              labelText: "Username",
+              labelStyle: blueTextStyle.copyWith(
+                fontSize: 14,
+                fontWeight: semiBold,
+              ),
+              hintText: 'Isi username anda',
+              hintStyle: greyTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: semiBold,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: kLineDarkColor,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: kBlueColor,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              filled: true,
+              fillColor: kWhiteColor,
+              contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+            ),
+            style: blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+          ),
+        ),
+      ],
+    );
+  }
+
+
+  Widget PasswordInput() {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(
+            top: 24,
+          ),
+          decoration: BoxDecoration(
+            color: kWhiteColor,
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                  child: TextFormField(
+                obscureText: (isShowPassword) ? false : true,
+                controller: passwordController,
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  labelStyle: blueTextStyle.copyWith(
+                    fontSize: 14,
+                    fontWeight: semiBold,
+                  ),
+                  hintText: 'Isi password anda',
+                  hintStyle: greyTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: semiBold,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: kLineDarkColor,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: kBlueColor,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  filled: true,
+                  fillColor: kWhiteColor,
+                  contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        isShowPassword = !isShowPassword;
+                      });
+                      print(isShowPassword);
+                    },
+                    child: Icon(
+                      isShowPassword
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
+                      color: kGreyColor,
+                    ),
+                  ),
+                ),
+                style:
+                    blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+              )),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +157,8 @@ class _SignInPageState extends State<SignInPage> {
         ),
         children: [
           title(),
-          usernameInput(),
-          passwordInput(),
+          UsernameInput(),
+          PasswordInput(),
           rememberCheckbox(),
           loginButton(),
           Container(
