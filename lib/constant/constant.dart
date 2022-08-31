@@ -37,7 +37,7 @@ const String notLogin = "Login terlebih dahulu untuk menyimpan favourite";
 //theme
 
 Color kBlackColor = Color(0xff222222);
-Color kBlackAccentColor = Color.fromARGB(255, 50, 51, 63);
+Color kBlackAccentColor = Color.fromARGB(255, 76, 77, 91);
 Color kGreyColor = Color(0xff94959B);
 Color kLineDarkColor = Color(0xffEAEAEA);
 Color kWhiteGreyColor = Color(0xffF1F1F5);
