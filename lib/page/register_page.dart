@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hi_sumenep_app/api/dummyRepo.dart';
 
 import '../component/customButton.dart';
 import '../constant/constant.dart';
+import 'home.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -113,7 +115,8 @@ class _SignupPageState extends State<SignupPage> {
               fillColor: kWhiteColor,
               contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
             ),
-            style: blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+            style: blackAccentTextStyle.copyWith(
+                fontSize: 16, fontWeight: semiBold),
           ),
         ),
       ],
@@ -161,7 +164,8 @@ class _SignupPageState extends State<SignupPage> {
               fillColor: kWhiteColor,
               contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
             ),
-            style: blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+            style: blackAccentTextStyle.copyWith(
+                fontSize: 16, fontWeight: semiBold),
           ),
         ),
       ],
@@ -228,8 +232,8 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                 ),
-                style:
-                    blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+                style: blackAccentTextStyle.copyWith(
+                    fontSize: 16, fontWeight: semiBold),
               )),
             ],
           ),
@@ -298,8 +302,8 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                 ),
-                style:
-                    blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+                style: blackAccentTextStyle.copyWith(
+                    fontSize: 16, fontWeight: semiBold),
               )),
             ],
           ),
@@ -324,7 +328,7 @@ class _SignupPageState extends State<SignupPage> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
-        'Username atau password Salah',
+        'password anda tidak sama',
         style: whiteTextStyle.copyWith(
           fontSize: 16,
           fontWeight: semiBold,
@@ -347,24 +351,81 @@ class _SignupPageState extends State<SignupPage> {
             UsernameInput(),
             PasswordInput(),
             ConfirmPasswordInput(),
+            registerbutton(),
             Container(
-              margin: EdgeInsets.only(top: 32),
-              width: visualWidth(context),
-              child: customButton("Register", kBlueColor, BorderSide.none,
-                  whiteTextStyle, 18, semiBold, onPress()),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  "Batal",
-                  style:
-                      greyTextStyle.copyWith(fontWeight: medium, fontSize: 16),
+              margin: const EdgeInsets.only(top: 8),
+              child: Center(
+                child: TextButton(
+                  onPressed: () => Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => const Home())),
+                  child: Text(
+                    'Batal',
+                    style: blueTextStyle.copyWith(
+                        fontSize: 16, fontWeight: medium),
+                  ),
                 ),
               ),
             ),
           ],
         ));
+  }
+
+  Widget registerbutton() {
+    return Container(
+      height: 56,
+      width: double.infinity,
+      margin: const EdgeInsets.only(top: 32),
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            isLoading = true;
+          });
+
+          Future.delayed(const Duration(seconds: 2), () {
+            setState(() {
+              isLoading = false;
+            });
+            if (NameController.text != 'admin' ||
+                usernameController.text != 'admin' ||
+                PasswordController.text != '1122334' ||
+                ConfirmPasswordController.text != '11223344') {
+              setState(() {
+                isPasswordWrong = true;
+              });
+              fToast.showToast(
+                child: errorToast(),
+                toastDuration: const Duration(seconds: 2),
+                gravity: ToastGravity.BOTTOM,
+              );
+              //
+            } else {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Home()),
+                  (route) => false);
+              isLogin = true;
+            }
+          });
+        },
+        style: TextButton.styleFrom(
+          backgroundColor: kBlueColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+        ),
+        child: isLoading
+            ? CircularProgressIndicator(
+                color: kWhiteColor,
+                backgroundColor: kBlackColor,
+              )
+            : Text(
+                'Register',
+                style: whiteTextStyle.copyWith(
+                  fontSize: 18,
+                  fontWeight: semiBold,
+                ),
+              ),
+      ),
+    );
   }
 }
