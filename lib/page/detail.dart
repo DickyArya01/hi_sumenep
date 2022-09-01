@@ -227,7 +227,7 @@ class _DetailState extends State<Detail> {
                                 fontSize: 16, fontWeight: semiBold),
                           )
                         : Text(
-                            'IDR ${(widget.wisata.price / 1000).toString().replaceAll(regex, '')}jt',
+                            'IDR ${(widget.wisata.price / 1000).toString().replaceAll(regex, '')}k',
                             style: blackTextStyle.copyWith(
                                 fontSize: 16, fontWeight: semiBold),
                           ),
