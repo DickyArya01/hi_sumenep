@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
-import 'package:hi_sumenep_app/page/home.dart';
+import '../page/register_page.dart';
+import 'home.dart';
+
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -28,45 +30,126 @@ class _SignInPageState extends State<SignInPage> {
     fToast.init(context);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24,
+  Widget UsernameInput() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 48),
+          decoration: BoxDecoration(
+            color: kWhiteColor,
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: TextFormField(
+            controller: usernameController,
+            decoration: InputDecoration(
+              labelText: "Username",
+              labelStyle: blueTextStyle.copyWith(
+                fontSize: 14,
+                fontWeight: semiBold,
+              ),
+              hintText: 'Isi username anda',
+              hintStyle: greyTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: semiBold,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: kLineDarkColor,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: kBlueColor,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              filled: true,
+              fillColor: kWhiteColor,
+              contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+            ),
+            style: blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+          ),
         ),
-        children: [
-          title(),
-          usernameInput(),
-          passwordInput(),
-          rememberCheckbox(),
-          loginButton(),
-          Container(
-            margin: const EdgeInsets.only(top: 8),
-            child: Center(
-              child: TextButton(
-                onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home())),
-                child: Text(
-                  'Lain Kali',
-                  style: blueTextStyle.copyWith(
-                    fontSize: 16, fontWeight: medium
-                  ),),
-              ),
-            ),
-          ),
-          Center(
-            child: Container(
-              margin: const EdgeInsets.only(
-                top: 24,
-              ),
-            ),
-          ),
-          registerButton(),
-        ],
-      ),
+      ],
     );
   }
 
+
+  Widget PasswordInput() {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(
+            top: 24,
+          ),
+          decoration: BoxDecoration(
+            color: kWhiteColor,
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                  child: TextFormField(
+                obscureText: (isShowPassword) ? false : true,
+                controller: passwordController,
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  labelStyle: blueTextStyle.copyWith(
+                    fontSize: 14,
+                    fontWeight: semiBold,
+                  ),
+                  hintText: 'Isi password anda',
+                  hintStyle: greyTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: semiBold,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: kLineDarkColor,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: kBlueColor,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  filled: true,
+                  fillColor: kWhiteColor,
+                  contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        isShowPassword = !isShowPassword;
+                      });
+                      print(isShowPassword);
+                    },
+                    child: Icon(
+                      isShowPassword
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
+                      color: kGreyColor,
+                    ),
+                  ),
+                ),
+                style:
+                    blackAccentTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+              )),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+ 
   Widget title() {
     return Container(
       margin: const EdgeInsets.only(top: 84),
@@ -190,6 +273,7 @@ class _SignInPageState extends State<SignInPage> {
     return Icon(
       iconData,
       color: kGreyColor,
+      size: 12,
     );
   }
 
@@ -290,7 +374,9 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()));
+            },
             child: Text(
               'Register',
               style: blueTextStyle.copyWith(
@@ -320,4 +406,44 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
   }
+
+   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+        ),
+        children: [
+          title(),
+          UsernameInput(),
+          PasswordInput(),
+          rememberCheckbox(),
+          loginButton(),
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            child: Center(
+              child: TextButton(
+                onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home())),
+                child: Text(
+                  'Lain Kali',
+                  style: blueTextStyle.copyWith(
+                    fontSize: 16, fontWeight: medium
+                  ),),
+              ),
+            ),
+          ),
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(
+                top: 24,
+              ),
+            ),
+          ),
+          registerButton(),
+        ],
+      ),
+    );
+  }
+
 }

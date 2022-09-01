@@ -37,18 +37,22 @@ const String notLogin = "Login terlebih dahulu untuk menyimpan favourite";
 //theme
 
 Color kBlackColor = Color(0xff222222);
-Color kBlackAccentColor = Color.fromARGB(255, 50, 51, 63);
+Color kBlackAccentColor = Color.fromARGB(255, 76, 77, 91);
 Color kGreyColor = Color(0xff94959B);
 Color kLineDarkColor = Color(0xffEAEAEA);
 Color kWhiteGreyColor = Color(0xffF1F1F5);
 Color kWhiteColor = Color(0xffFFFFFF);
 Color kBlueColor = Color(0xff1581B7);
+Color kBlueAccentColor = Color.fromARGB(138, 122, 209, 253);
 Color kDarkBackgroundColor = Color(0xff252836);
 Color kGreenColor = Color(0xff3CB371);
 Color kRedColor = Color(0xffFF314A);
 
 TextStyle blackTextStyle = GoogleFonts.poppins(
   color: kBlackColor,
+);
+TextStyle blueAccentTextStyle = GoogleFonts.poppins(
+  color: kBlueAccentColor,
 );
 TextStyle blackAccentTextStyle = GoogleFonts.poppins(
   color: kBlackAccentColor,

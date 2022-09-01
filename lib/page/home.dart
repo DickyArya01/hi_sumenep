@@ -10,10 +10,11 @@ import 'package:hi_sumenep_app/component/appbar/homeAppbar.dart';
 import 'package:hi_sumenep_app/component/appbar/profileAppbar.dart';
 import 'package:hi_sumenep_app/component/navbar.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
-import 'package:hi_sumenep_app/page/login_page.dart';
 import 'package:hi_sumenep_app/page/mainPage/favouritepage.dart';
 import 'package:hi_sumenep_app/page/mainPage/homepage.dart';
-import 'package:hi_sumenep_app/page/mainPage/profilepage.dart';
+import 'login_page.dart';
+import 'mainPage/profilepage.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         if (isLogin) {
           selectedIndex = index;
         } else {
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const SignInPage()), (route) => true);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInPage(),));
           selectedIndex = 0;
         }
       }
