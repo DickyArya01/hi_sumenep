@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/page/detail.dart';
+import 'package:http/http.dart';
 
 Container cardImage(context, String url) {
   return Container(
@@ -22,18 +25,22 @@ Container cardImage(context, String url) {
   );
 }
 
-Container blackText(
-    String title, double size, double topPadding, double leftPadding) {
-  return Container(
-    margin: EdgeInsets.only(
-      left: leftPadding,
-      top: topPadding,
-    ),
-    child: Text(
-      title,
-      style: blackTextStyle.copyWith(
-        fontSize: size,
-        fontWeight: semiBold,
+SizedBox blackText(
+    String title, double size, double topPadding, double leftPadding, context) {
+  return SizedBox(
+    width: visualWidth(context) * 0.6,
+    child: Container(
+      margin: EdgeInsets.only(
+        left: leftPadding,
+        top: topPadding,
+      ),
+      child: Text(
+        title,
+        style: blackTextStyle.copyWith(
+          fontSize: size,
+          fontWeight: semiBold,
+        ),
+        maxLines: 1
       ),
     ),
   );
@@ -58,13 +65,13 @@ Stack cardItem(context, String title, String url, String desc) {
           ],
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 cardImage(context, url),
-                blackText(title, 16, 8, 24),
+                blackText(title, 16, 8, 24, context),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: x24),
                   child: Text(desc,
@@ -82,23 +89,24 @@ Stack cardItem(context, String title, String url, String desc) {
 }
 
 class CustomCard1 extends StatefulWidget {
-  final Data wisata;
-
-  CustomCard1({required this.wisata});
+  final wisata;
+  final galeri;
+  CustomCard1({required this.wisata, required this.galeri});
 
   @override
   State<CustomCard1> createState() => _CustomCard1State();
 }
 
 class _CustomCard1State extends State<CustomCard1> {
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => Detail(wisata: widget.wisata)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Detail(wisata: widget.wisata)));
         },
         child: Stack(
           children: [
@@ -119,6 +127,7 @@ class _CustomCard1State extends State<CustomCard1> {
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,13 +136,21 @@ class _CustomCard1State extends State<CustomCard1> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          blackText(widget.wisata.title, 16, 12, 24),
+                          blackText('${widget.wisata.title}', 16, 12, 24, context),
                           Container(
                             margin: EdgeInsets.only(right: 24, top: 12),
-                            child: Text(
-                              'IDR ${widget.wisata.price}',
-                              style: blueTextStyle.copyWith(
-                                  fontSize: 16, fontWeight: semiBold),
+                            child: Expanded(
+                              child: (widget.wisata.price >999999)
+                              ?Text(
+                                'IDR ${(widget.wisata.price/1000000).toString().replaceAll(regex, '')}jt',
+                                style: blueTextStyle.copyWith(
+                                    fontSize: 16, fontWeight: semiBold),
+                              ) 
+                              :Text(
+                                'IDR ${(widget.wisata.price/1000).toString().replaceAll(regex, '')}k',
+                                style: blueTextStyle.copyWith(
+                                    fontSize: 16, fontWeight: semiBold),
+                              ) 
                             ),
                           )
                         ],

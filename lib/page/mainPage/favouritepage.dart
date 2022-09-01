@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
+import 'package:hi_sumenep_app/component/card%20copy.dart';
 import 'package:hi_sumenep_app/component/card.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 
@@ -33,8 +34,8 @@ class _FavouritePageState extends State<FavouritePage> {
                           dataFav.removeAt(index);
                         });
                       },
-                      child: CustomCard(
-                        wisata: dataFav[index],
+                      child: CustomCard1(
+                        wisata: dataFav[index], galeri: dataFav[index].id,
                       ),
                     )),
           )

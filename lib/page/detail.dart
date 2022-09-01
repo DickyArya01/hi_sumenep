@@ -43,7 +43,7 @@ Widget buildImage(String url, int index) {
 }
 
 class Detail extends StatefulWidget {
-  final Wisata wisata;
+  final Data wisata;
   const Detail({Key? key, required this.wisata}) : super(key: key);
 
   @override
@@ -115,8 +115,8 @@ class _DetailState extends State<Detail> {
                 child: IconButton(
                     onPressed: () {
                       if (!isLogin) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            snackBar(notLogin, Colors.redAccent));
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar(notLogin, Colors.redAccent));
                       } else if (!dataFav.contains(widget.wisata)) {
                         setState(() {
                           dataFav.add(widget.wisata);
@@ -198,19 +198,39 @@ class _DetailState extends State<Detail> {
             padding: const EdgeInsets.symmetric(vertical: x8, horizontal: x16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    styleText(widget.wisata.title, 18, bold, kBlackColor),
+                    SizedBox(
+                      width: visualWidth(context) * 0.6,
+                      child: Container(
+                        child: Text(widget.wisata.title,
+                            style: blackTextStyle.copyWith(
+                              fontSize: 16,
+                              fontWeight: semiBold,
+                            ),
+                            maxLines: 2),
+                      ),
+                    ),
                     styleText('Kecamatan Socah', 12, semiBold, kBlueColor)
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    styleText('IDR ${widget.wisata.price}', 16, semiBold,
-                        kBlackColor),
+                    (widget.wisata.price > 999999)
+                        ? Text(
+                            'IDR ${(widget.wisata.price / 1000000).toString().replaceAll(regex, '')}jt',
+                            style: blackTextStyle.copyWith(
+                                fontSize: 16, fontWeight: semiBold),
+                          )
+                        : Text(
+                            'IDR ${(widget.wisata.price / 1000).toString().replaceAll(regex, '')}jt',
+                            style: blackTextStyle.copyWith(
+                                fontSize: 16, fontWeight: semiBold),
+                          ),
                     styleText('per orang', 12, semiBold, kBlueColor)
                   ],
                 ),
@@ -230,7 +250,7 @@ class _DetailState extends State<Detail> {
             ),
           ),
           Container(
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
               height: visualHeight(context) * 0.4,
               child: Container(
                 width: visualWidth(context),

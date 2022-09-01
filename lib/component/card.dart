@@ -95,10 +95,10 @@ class _CustomCardState extends State<CustomCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Detail(wisata: widget.wisata)));
+          // Navigator.push(
+              // context,
+              // MaterialPageRoute(
+                  // builder: (context) => Detail(wisata: widget.wisata)));
         },
         child: Stack(
           children: [

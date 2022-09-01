@@ -5,8 +5,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/page/detail.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:location/location.dart';
-
 
 class MapSample extends StatefulWidget {
   @override
@@ -14,6 +14,7 @@ class MapSample extends StatefulWidget {
 }
 
 class MapSampleState extends State<MapSample> {
+  List<Data> data = [];
   final Completer<GoogleMapController> _controller = Completer();
 
 //
@@ -30,6 +31,26 @@ class MapSampleState extends State<MapSample> {
     super.initState();
     // fetchState();
     // marker.addAll(list);
+    fetchWisata();
+  }
+
+  fetchWisata() async {
+    final responseKategori =
+        await get(Uri.parse('http://192.168.100.16:5000/wisata'));
+
+    if (responseKategori.statusCode == 200) {
+      var responseKategoriJson = json.decode(responseKategori.body);
+
+      print(responseKategoriJson);
+
+      setState(() {
+        data = (responseKategoriJson[0]['data'] as List)
+            .map((e) => Data.fromJson(e))
+            .toList();
+      });
+    } else {
+      throw Exception('gagal ${responseKategori.statusCode}');
+    }
   }
 
   // fetchState() async {
@@ -58,14 +79,14 @@ class MapSampleState extends State<MapSample> {
       },
       // markers: Set<Marker>.of(marker),
 
-      markers: getMarkers(dataDummmy),
+      markers: getMarkers(data),
       myLocationEnabled: true,
     );
   }
 
-  Set<Marker> getMarkers(List<Wisata> items) {
+  Set<Marker> getMarkers(List<Data> items) {
     for (int i = 0; i < items.length; i++) {
-      var data = items[i];
+      var item = items[i];
 
       double lat = items[i].lat;
       double lon = items[i].lon;
@@ -80,7 +101,7 @@ class MapSampleState extends State<MapSample> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Detail(wisata: data)));
+                        builder: (context) => Detail(wisata: item)));
               },
             ),
             markerId: MarkerId('$i'),

@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     if (currentCategory != index) {
       return ElevatedButton(
         onPressed: () async {
-          currentCategory = index;
+          currentCategory = index-1;
           print(currentCategory);
           Navigator.push(
               context,

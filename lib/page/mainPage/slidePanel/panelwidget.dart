@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
+import 'package:hi_sumenep_app/component/card%20copy.dart';
 import 'package:hi_sumenep_app/component/card.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
+import 'package:http/http.dart';
 
 class PanelWidget extends StatefulWidget {
   ScrollController controller;
@@ -23,12 +27,31 @@ class PanelWidget extends StatefulWidget {
 }
 
 class _PanelWidgetState extends State<PanelWidget> {
-  List<Wisata> data = [];
+  List<Data> data = [];
 
   @override
   void initState() {
     super.initState();
-    data = dataDummmy;
+    fetchWisata();
+  }
+
+  fetchWisata() async {
+    final responseKategori =
+        await get(Uri.parse('http://192.168.100.16:5000/wisata'));
+
+    if (responseKategori.statusCode == 200) {
+      var responseKategoriJson = json.decode(responseKategori.body);
+
+      print(responseKategoriJson);
+
+      setState(() {
+        data = (responseKategoriJson[0]['data'] as List)
+            .map((e) => Data.fromJson(e))
+            .toList();
+      });
+    } else {
+      throw Exception('gagal ${responseKategori.statusCode}');
+    }
   }
 
   @override
@@ -41,9 +64,7 @@ class _PanelWidgetState extends State<PanelWidget> {
               child: Text(
                 '${data.length} $panelSlideHint',
                 style: blackAccentTextStyle.copyWith(
-                  fontSize: 16,
-                  fontWeight: semiBold
-                ),
+                    fontSize: 16, fontWeight: semiBold),
               ),
             ),
           ),
@@ -53,7 +74,8 @@ class _PanelWidgetState extends State<PanelWidget> {
                 padding: const EdgeInsets.symmetric(horizontal: x16),
                 controller: widget.controller,
                 itemCount: data.length,
-                itemBuilder: (context, int index) => CustomCard(wisata: data[index])),
+                itemBuilder: (context, int index) =>
+                    CustomCard1(wisata: data[index], galeri: data[index].id,)),
           ),
           Container(
             margin: EdgeInsets.only(top: 2),

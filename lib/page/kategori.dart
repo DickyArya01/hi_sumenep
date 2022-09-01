@@ -20,28 +20,53 @@ class KategoriPage extends StatefulWidget {
 
 class _KategoriPageState extends State<KategoriPage> {
   List<Data> dataWisata = [];
+  List<Data> dataGaleri = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     fetchKategori(widget.index);
-    print(dataWisata);
   }
 
   fetchKategori(int index) async {
-    final response =
-        await get(Uri.parse('http://192.168.0.185:5000/kategori/$index'));
+    if (index == 0) {
+      final responseKategori =
+          await get(Uri.parse('http://192.168.100.16:5000/rekomendasi'));
 
-    if (response.statusCode == 200) {
-      var responseJson = json.decode(response.body);
-      setState(() {
-        dataWisata = (responseJson[0]['data'] as List)
-            .map((e) => Data.fromJson(e))
-            .toList();
-      });
+      if (responseKategori.statusCode == 200) {
+        var responseKategoriJson = json.decode(responseKategori.body);
+
+        print(responseKategoriJson);
+
+        setState(() {
+          dataWisata = (responseKategoriJson[0]['data'] as List)
+              .map((e) => Data.fromJson(e))
+              .toList();
+        });
+      } else {
+        throw Exception('gagal ${responseKategori.statusCode}');
+      }
     } else {
-      throw Exception('gagal ${response.statusCode}');
+      final responseKategori =
+          await get(Uri.parse('http://192.168.100.16:5000/kategori/$index'));
+
+      final responseGaleri =
+          await get(Uri.parse('http://192.168.100.16:5000/galerifoto/$index'));
+
+      if (responseKategori.statusCode == 200) {
+        var responseKategoriJson = json.decode(responseKategori.body);
+
+        print(responseKategoriJson);
+
+        setState(() {
+          dataWisata = (responseKategoriJson[0]['data'] as List)
+              .map((e) => Data.fromJson(e))
+              .toList();
+        });
+      } else {
+        throw Exception('gagal ${responseKategori.statusCode}');
+      }
     }
   }
 
@@ -66,7 +91,7 @@ class _KategoriPageState extends State<KategoriPage> {
           margin: EdgeInsets.only(right: 40),
           width: visualWidth(context),
           child: Text(
-            category[widget.index],
+            category[widget.index + 1],
             textAlign: TextAlign.center,
             style: blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
           ),
@@ -85,6 +110,7 @@ class _KategoriPageState extends State<KategoriPage> {
           itemCount: dataWisata.length,
           itemBuilder: (context, int index) => CustomCard1(
             wisata: dataWisata[index],
+            galeri: dataWisata[index].id,
           ),
         ),
       ),
