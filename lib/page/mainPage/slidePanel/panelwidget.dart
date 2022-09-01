@@ -37,7 +37,7 @@ class _PanelWidgetState extends State<PanelWidget> {
 
   fetchWisata() async {
     final responseKategori =
-        await get(Uri.parse('http://192.168.100.16:5000/wisata'));
+        await get(Uri.parse(api+wisata));
 
     if (responseKategori.statusCode == 200) {
       var responseKategoriJson = json.decode(responseKategori.body);
@@ -85,7 +85,6 @@ class _PanelWidgetState extends State<PanelWidget> {
 
   Widget buildDragHandle() => GestureDetector(
         onTap: () {
-          widget.onTap!("njay");
         },
         child: Center(
           child: Container(

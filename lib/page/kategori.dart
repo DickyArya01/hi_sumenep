@@ -32,7 +32,7 @@ class _KategoriPageState extends State<KategoriPage> {
   fetchKategori(int index) async {
     if (index == 0) {
       final responseKategori =
-          await get(Uri.parse('http://192.168.100.16:5000/rekomendasi'));
+          await get(Uri.parse(api+rekomendasi));
 
       if (responseKategori.statusCode == 200) {
         var responseKategoriJson = json.decode(responseKategori.body);
@@ -49,10 +49,10 @@ class _KategoriPageState extends State<KategoriPage> {
       }
     } else {
       final responseKategori =
-          await get(Uri.parse('http://192.168.100.16:5000/kategori/$index'));
+          await get(Uri.parse('$api$kategori$index'));
 
       final responseGaleri =
-          await get(Uri.parse('http://192.168.100.16:5000/galerifoto/$index'));
+          await get(Uri.parse('${api}galerifoto/$index'));
 
       if (responseKategori.statusCode == 200) {
         var responseKategoriJson = json.decode(responseKategori.body);

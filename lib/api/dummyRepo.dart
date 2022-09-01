@@ -8,11 +8,15 @@ import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:hi_sumenep_app/icon/icon_fasilitas_icons.dart';
 import 'package:hi_sumenep_app/page/kategori.dart';
 import 'package:http/http.dart';
+
 RegExp regex = RegExp(r'([.]*0)(?!.*\d)');
 
 bool isLogin = false;
 
-String api = 'http://192.168.100.15:5000/';
+String api = 'http://192.168.100.16:5000/';
+String wisata = 'wisata';
+String rekomendasi = 'rekomendasi';
+String kategori = 'kategori/';
 
 List<String> category = [
   'Semua',
@@ -166,5 +170,3 @@ class Data {
         category: json[5]);
   }
 }
-
-
