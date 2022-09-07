@@ -35,7 +35,8 @@ class _FavouritePageState extends State<FavouritePage> {
                         });
                       },
                       child: CustomCard1(
-                        wisata: dataFav[index], galeri: dataFav[index].id,
+                        wisata: dataFav[index], 
+                        // galeri: dataFav[index].id,
                       ),
                     )),
           )

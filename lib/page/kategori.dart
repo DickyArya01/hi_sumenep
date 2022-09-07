@@ -6,7 +6,6 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hi_sumenep_app/api/dummyRepo.dart';
 import 'package:hi_sumenep_app/component/card%20copy.dart';
-import 'package:hi_sumenep_app/component/card.dart';
 import 'package:hi_sumenep_app/constant/constant.dart';
 import 'package:http/http.dart';
 
@@ -20,7 +19,7 @@ class KategoriPage extends StatefulWidget {
 
 class _KategoriPageState extends State<KategoriPage> {
   List<Data> dataWisata = [];
-  List<Data> dataGaleri = [];
+  List<DataThumbnail> dataGaleri = [];
 
   @override
   void initState() {
@@ -31,28 +30,34 @@ class _KategoriPageState extends State<KategoriPage> {
 
   fetchKategori(int index) async {
     if (index == 0) {
-      final responseKategori =
-          await get(Uri.parse(api+rekomendasi));
+      final responseKategori = await get(Uri.parse(api + rekomendasi));
+
+      final responseGaleriFoto = await get(Uri.parse(api+galerifoto+'1'));
+
 
       if (responseKategori.statusCode == 200) {
         var responseKategoriJson = json.decode(responseKategori.body);
+        // var responseGaleriFotoJson = json.decode(responseGaleriFoto.body);
 
         print(responseKategoriJson);
+        print(responseGaleriFoto.statusCode);
 
         setState(() {
           dataWisata = (responseKategoriJson[0]['data'] as List)
               .map((e) => Data.fromJson(e))
               .toList();
+          // dataGaleri = (responseGaleriFotoJson[0]['data'] as List)
+          //     .map((e) => DataThumbnail.fromJson(e))
+          //     .toList();
         });
       } else {
         throw Exception('gagal ${responseKategori.statusCode}');
       }
     } else {
-      final responseKategori =
-          await get(Uri.parse('$api$kategori$index'));
+      final responseKategori = await get(Uri.parse('$api$kategori$index'));
 
-      final responseGaleri =
-          await get(Uri.parse('${api}galerifoto/$index'));
+      // final responseGaleri = await get(Uri.parse('${api}galerifoto/1'));
+      // print(responseGaleri.statusCode);
 
       if (responseKategori.statusCode == 200) {
         var responseKategoriJson = json.decode(responseKategori.body);
@@ -110,7 +115,7 @@ class _KategoriPageState extends State<KategoriPage> {
           itemCount: dataWisata.length,
           itemBuilder: (context, int index) => CustomCard1(
             wisata: dataWisata[index],
-            galeri: dataWisata[index].id,
+            // galeri: dataGaleri[0],
           ),
         ),
       ),

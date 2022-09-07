@@ -28,6 +28,7 @@ class PanelWidget extends StatefulWidget {
 
 class _PanelWidgetState extends State<PanelWidget> {
   List<Data> data = [];
+  List<DataThumbnail> datafoto = [];
 
   @override
   void initState() {
@@ -36,18 +37,23 @@ class _PanelWidgetState extends State<PanelWidget> {
   }
 
   fetchWisata() async {
-    final responseKategori =
-        await get(Uri.parse(api+wisata));
+    final responseKategori = await get(Uri.parse(api + wisata));
+    final responseGaleriFoto = await get(Uri.parse(api + galerifoto));
 
     if (responseKategori.statusCode == 200) {
       var responseKategoriJson = json.decode(responseKategori.body);
+      // var responseGaleriFotoJson = json.decode(responseGaleriFoto.body);
 
       print(responseKategoriJson);
+      // print(responseGaleriFotoJson);
 
       setState(() {
         data = (responseKategoriJson[0]['data'] as List)
             .map((e) => Data.fromJson(e))
             .toList();
+        // datafoto = (responseGaleriFotoJson[0]['data'] as List)
+        //     .map((e) => DataThumbnail.fromJson(e))
+        //     .toList();
       });
     } else {
       throw Exception('gagal ${responseKategori.statusCode}');
@@ -74,8 +80,10 @@ class _PanelWidgetState extends State<PanelWidget> {
                 padding: const EdgeInsets.symmetric(horizontal: x16),
                 controller: widget.controller,
                 itemCount: data.length,
-                itemBuilder: (context, int index) =>
-                    CustomCard1(wisata: data[index], galeri: data[index].id,)),
+                itemBuilder: (context, int index) => CustomCard1(
+                      wisata: data[index],
+                      // galeri: datafoto[index],
+                    )),
           ),
           Container(
             margin: EdgeInsets.only(top: 2),
@@ -84,8 +92,7 @@ class _PanelWidgetState extends State<PanelWidget> {
       );
 
   Widget buildDragHandle() => GestureDetector(
-        onTap: () {
-        },
+        onTap: () {},
         child: Center(
           child: Container(
             margin: const EdgeInsets.only(top: x8),

@@ -17,6 +17,9 @@ String api = 'http://192.168.100.16:5000/';
 String wisata = 'wisata';
 String rekomendasi = 'rekomendasi';
 String kategori = 'kategori/';
+String galerifoto = 'galerifoto/';
+
+String apiGambar = 'http://192.168.100.16/Tugas/HiSumenepWebadmin/kelola/';
 
 List<String> category = [
   'Semua',
@@ -140,7 +143,6 @@ List<Travel> travel = [
 class Data {
   int id;
   String title;
-  String url;
   String desc;
   double price;
   double lat;
@@ -150,7 +152,6 @@ class Data {
   Data(
       {required this.id,
       required this.title,
-      required this.url,
       required this.desc,
       required this.price,
       required this.lat,
@@ -161,12 +162,21 @@ class Data {
     return Data(
         id: json[0],
         title: json[1],
-        url:
-            'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
         desc: json[2],
         price: json[6],
         lat: json[3],
         lon: json[4],
         category: json[5]);
+  }
+}
+
+
+class DataThumbnail {
+  String url;
+
+  DataThumbnail({required this.url});
+
+  factory DataThumbnail.fromJson(List<dynamic> json) {
+    return DataThumbnail(url: json[0]);
   }
 }

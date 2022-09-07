@@ -77,7 +77,7 @@ class _DetailState extends State<Detail> {
     }
 
     _videoPlayerController = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+      'http://192.168.100.16/Tugas/HiSumenepWebadmin/kelola/galeri/1662481421.mp4',
     )..initialize().then((value) {
         setState(() {});
       });
@@ -274,12 +274,9 @@ class _DetailState extends State<Detail> {
                         : Container(
                             height: visualHeight(context) * 0.3,
                             width: visualWidth(context),
-                            color: kGreyColor,
+                            color: kBlackColor,
                             child: const Center(
-                              child: Icon(
-                                Icons.play_arrow,
-                                size: 64,
-                              ),
+                              child:CircularProgressIndicator(),
                             ),
                           ),
                     GestureDetector(
@@ -455,5 +452,6 @@ class _DetailState extends State<Detail> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    _videoPlayerController.dispose();
   }
 }
